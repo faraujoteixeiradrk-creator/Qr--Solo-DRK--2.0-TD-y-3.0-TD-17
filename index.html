@@ -295,7 +295,7 @@
                 
                 
                 <div id="initial-icon-bg" class="w-16 h-16 bg-drk-50 rounded-full flex items-center justify-center mx-auto mb-4 text-drk-600">
-                     <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
+                    <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
                         <style>.drk-ring{fill:none;stroke-width:10;stroke-linecap:round;}</style>
                         <circle class="drk-ring" cx="45" cy="45" r="35" stroke="#E50000"/>
                         <circle class="drk-ring" cx="55" cy="55" r="35" stroke="#FFCC00"/>
@@ -347,6 +347,25 @@
 
         <!-- 5. Results View -->
         <div id="results-view" class="hidden animate-fade-in-up">
+            
+            <!-- INICIO DEL BANNER DE DRK (SOLICITADO) -->
+            <div class="bg-drk-900 text-white p-4 md:p-6 rounded-2xl shadow-lg -mx-4 md:-mx-6 mb-6 flex items-center justify-between border-b-4 border-drk-500">
+                <div class="flex items-center gap-3">
+                    <svg class="w-10 h-10" viewBox="0 0 100 100" fill="none">
+                        <style>.drk-ring{fill:none;stroke-width:10;stroke-linecap:round;}</style>
+                        <circle class="drk-ring" cx="45" cy="45" r="35" stroke="#E50000"/>
+                        <circle class="drk-ring" cx="55" cy="55" r="35" stroke="#FFCC00"/>
+                        <circle class="drk-ring" cx="45" cy="55" r="35" stroke="#0079C1"/>
+                        <circle class="drk-ring" cx="55" cy="45" r="35" stroke="#00A859"/>
+                    </svg>
+                    <div>
+                        <h1 class="text-2xl font-black tracking-tight">DRK ENERGÍA</h1>
+                        <p class="text-xs text-drk-100 opacity-80 mt-1">Liderando el ahorro y la eficiencia energética.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN DEL BANNER DE DRK -->
+            
             <div class="text-center mb-6">
                 <div class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold mb-2">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Análisis Completado
@@ -840,19 +859,19 @@
         
         function calculateDays(startDateStr, endDateStr) {
              try {
-                const [d1, m1, y1] = startDateStr.split('/').map(Number);
-                const [d2, m2, y2] = endDateStr.split('/').map(Number);
+                 const [d1, m1, y1] = startDateStr.split('/').map(Number);
+                 const [d2, m2, y2] = endDateStr.split('/').map(Number);
 
-                const date1 = new Date(y1, m1 - 1, d1);
-                const date2 = new Date(y2, m2 - 1, d2);
-                
-                if (isNaN(date1.getTime()) || isNaN(date2.getTime())) return 30;
+                 const date1 = new Date(y1, m1 - 1, d1);
+                 const date2 = new Date(y2, m2 - 1, d2);
+                 
+                 if (isNaN(date1.getTime()) || isNaN(date2.getTime())) return 30;
 
-                const ONE_DAY_MS = 1000 * 60 * 60 * 24;
-                const diffDays = (date2.getTime() - date1.getTime()) / ONE_DAY_MS;
-                return Math.round(diffDays) + 1;
+                 const ONE_DAY_MS = 1000 * 60 * 60 * 24;
+                 const diffDays = (date2.getTime() - date1.getTime()) / ONE_DAY_MS;
+                 return Math.round(diffDays) + 1;
              } catch (e) {
-                return 30;
+                 return 30;
              }
         }
         
@@ -1478,33 +1497,33 @@
 
                 allBreakdownsHTML += `
                     <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-lg text-sm">
-                               <h4 class="text-lg font-black text-slate-800 border-b pb-2 mb-3">Suministro ${index + 1}: ${resItem.cups} (${resItem.originalTariffType})</h4>
-                               ${statusText}
-                               <p class="text-xs text-slate-500 mb-3">Tarifa aplicada en el cálculo: <span class="font-bold text-slate-700">${appliedOfferName}</span></p>
-                               <div class="grid grid-cols-2 gap-4 border-b border-slate-200 pb-3 mb-3">
-                                   <div class="text-center">
-                                       <p class="text-slate-400 text-xs uppercase">Factura Actual Periodo</p>
-                                       <p class="font-bold text-cta-red-500">${eur(resItem.importe_total)}</p>
+                                   <h4 class="text-lg font-black text-slate-800 border-b pb-2 mb-3">Suministro ${index + 1}: ${resItem.cups} (${resItem.originalTariffType})</h4>
+                                   ${statusText}
+                                   <p class="text-xs text-slate-500 mb-3">Tarifa aplicada en el cálculo: <span class="font-bold text-slate-700">${appliedOfferName}</span></p>
+                                   <div class="grid grid-cols-2 gap-4 border-b border-slate-200 pb-3 mb-3">
+                                       <div class="text-center">
+                                           <p class="text-slate-400 text-xs uppercase">Factura Actual Periodo</p>
+                                           <p class="font-bold text-cta-red-500">${eur(resItem.importe_total)}</p>
+                                       </div>
+                                       <div class="text-center">
+                                           <p class="text-slate-400 text-xs uppercase">Nuevo Coste Periodo</p>
+                                           <p class="font-black text-drk-800">${eur(resItem.totalPeriod)}</p>
+                                       </div>
                                    </div>
-                                   <div class="text-center">
-                                       <p class="text-slate-400 text-xs uppercase">Nuevo Coste Periodo</p>
-                                       <p class="font-black text-drk-800">${eur(resItem.totalPeriod)}</p>
-                                   </div>
-                               </div>
 
-                               <p class="font-bold text-slate-800 mb-2">Desglose (${appliedOfferName}):</p>
-                               
-                               <div class="pl-2 space-y-2 font-mono text-xs">
-                                   <p class="font-bold text-slate-700">POTENCIA</p>
-                                   ${powerBreakdown}
-                                   <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Potencia</span><span>${num(resItem.subPower, 2)} €</span></div>
+                                   <p class="font-bold text-slate-800 mb-2">Desglose (${appliedOfferName}):</p>
                                    
-                                   <p class="font-bold text-slate-700 pt-2">ENERGÍA</p>
-                                   ${energyBreakdown}
-                                   <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Energía (Neto)</span><span>${num(resItem.subEnergyNet, 2)} €</span></div>
-                                   
-                                   <div class="flex justify-between font-black text-drk-800 pt-2"><span>TOTAL CON IMPUESTOS</span><span>${eur(resItem.totalPeriod)}</span></div>
-                               </div>
+                                   <div class="pl-2 space-y-2 font-mono text-xs">
+                                       <p class="font-bold text-slate-700">POTENCIA</p>
+                                       ${powerBreakdown}
+                                       <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Potencia</span><span>${num(resItem.subPower, 2)} €</span></div>
+                                       
+                                       <p class="font-bold text-slate-700 pt-2">ENERGÍA</p>
+                                       ${energyBreakdown}
+                                       <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Energía (Neto)</span><span>${num(resItem.subEnergyNet, 2)} €</span></div>
+                                       
+                                       <div class="flex justify-between font-black text-drk-800 pt-2"><span>TOTAL CON IMPUESTOS</span><span>${eur(resItem.totalPeriod)}</span></div>
+                                   </div>
                     </div>
                 `;
             });
@@ -1844,12 +1863,27 @@
             const GREEN_SAVE_COLOR = '#16a34a';
             const btnStyle = `display: inline-block; background-color: ${RED_CTA}; color: white; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 6px; margin: 20px 0; font-size: 16px;`;
 
+            // --- NUEVO BANNER EN EL HTML DEL CORREO (Paso 1) ---
+            const logoHtml = `<span style="display: inline-block; width: 40px; height: 40px; margin-right: 10px; vertical-align: middle;">${BRANDS.DRK.LOGO_SVG.replace(/class="[^"]*"/g, 'width="40" height="40"')}</span>`;
+            const headerContent = `
+                <div style="text-align: center;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center;">
+                        ${logoHtml}
+                        <div style="text-align: left;">
+                            <h1 style="margin:0; font-size: 24px; font-weight: bold; line-height: 1.1;">DRK ENERGÍA</h1>
+                            <p style="margin:2px 0 0 0; font-size: 13px; opacity: 0.9; color: #f0f9ff;">Maximizando su Ahorro Eléctrico</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // --- FIN NUEVO BANNER EN EL HTML DEL CORREO ---
+
+
             // --- PLANTILLA PARA AHORRO NEGATIVO ---
             if (bd.isNegativeSavings) {
                 return `<table cellpadding="0" cellspacing="0" style="${tableMain}">
                         <tr><td colspan="2" style="${headerCell}">
-                            <h1 style="margin:0; font-size: 24px;">ESTUDIO DE AHORRO</h1>
-                            <p style="margin:5px 0 0 0; font-size: 14px; opacity: 0.9;">TU TARIFA ACTUAL ES LA MÁS COMPETITIVA</p>
+                             ${headerContent}
                         </td></tr>
                         <tr><td colspan="2" style="padding: 15px;">
                             <p style="margin: 0; font-size: 13px;"><strong>CLIENTE:</strong> ${clientName}</p>
@@ -1956,68 +1990,67 @@
 
 
             return `<table cellpadding="0" cellspacing="0" style="${tableMain}">
-                    <tr><td colspan="2" style="${headerCell}">
-                        <h1 style="margin:0; font-size: 24px;">ESTUDIO DE AHORRO</h1>
-                        <p style="margin:5px 0 0 0; font-size: 14px; opacity: 0.9;">COMPARATIVA PROFESIONAL - ${D_BRAND_NAME.toUpperCase()}</p>
-                    </td></tr>
-                    
-                    <tr><td colspan="2" style="padding: 15px;">
-                        <p style="margin: 0; font-size: 13px;"><strong>CLIENTE:</strong> ${clientName}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>CUPS:</strong> ${bd.cups}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>COMERCIAL:</strong> ${commercialCode || 'N/A'}</p>
-                    </td></tr>
+                        <tr><td colspan="2" style="${headerCell}">
+                            ${headerContent}
+                        </td></tr>
+                        
+                        <tr><td colspan="2" style="padding: 15px;">
+                            <p style="margin: 0; font-size: 13px;"><strong>CLIENTE:</strong> ${clientName}</p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>CUPS:</strong> ${bd.cups}</p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>COMERCIAL:</strong> ${commercialCode || 'N/A'}</p>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="background-color: ${BG_LIGHT}; padding: 15px; text-align: center; border-top: 2px solid ${D_PRIMARY_MED}; border-bottom: 2px solid ${D_PRIMARY_MED};">
-                        <p style="margin: 0; color: ${D_PRIMARY_MED}; font-size: 12px; font-weight: bold; letter-spacing: 1px;">LA MEJOR OPCIÓN PARA TI ES</p>
-                        <h2 style="margin: 5px 0 0 0; color: ${D_PRIMARY_DARK}; font-size: 22px;">${commercialTariffName}</h2>
-                    </td></tr>
+                        <tr><td colspan="2" style="background-color: ${BG_LIGHT}; padding: 15px; text-align: center; border-top: 2px solid ${D_PRIMARY_MED}; border-bottom: 2px solid ${D_PRIMARY_MED};">
+                            <p style="margin: 0; color: ${D_PRIMARY_MED}; font-size: 12px; font-weight: bold; letter-spacing: 1px;">LA MEJOR OPCIÓN PARA TI ES</p>
+                            <h2 style="margin: 5px 0 0 0; color: ${D_PRIMARY_DARK}; font-size: 22px;">${commercialTariffName}</h2>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0 20px;">
-                        <div style="text-align: center; margin: 25px 0 10px 0;">
-                            <p style="margin: 0; font-size: 16px; color: #555; font-weight: bold;">TU AHORRO ANUAL ESTIMADO ES:</p>
-                        </div>
-                        <div style="${savingsBox}">
-                            <span style="font-size: 38px; white-space: nowrap;">${eur(bd.savings)}</span>
-                            <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold;">¡CONSIGUE TU AHORRO ANUAL!</p>
-                        </div>
-                    </td></tr>
+                        <tr><td colspan="2" style="padding: 0 20px;">
+                            <div style="text-align: center; margin: 25px 0 10px 0;">
+                                <p style="margin: 0; font-size: 16px; color: #555; font-weight: bold;">TU AHORRO ANUAL ESTIMADO ES:</p>
+                            </div>
+                            <div style="${savingsBox}">
+                                <span style="font-size: 38px; white-space: nowrap;">${eur(bd.savings)}</span>
+                                <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold;">¡CONSIGUE TU AHORRO ANUAL!</p>
+                            </div>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0 20px;">
-                        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px; table-layout: fixed;">
-                            <tr>
-                                <td style="width: 50%; padding: 15px; background-color: #f9fafb; border: 1px solid #ddd; text-align: center; vertical-align: top;">
-                                    <div style="font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase;">TU FACTURA ACTUAL</div>
-                                    <div style="font-size: 20px; font-weight: bold; color: #ef4444; margin: 5px 0; text-decoration: line-through; white-space: nowrap;">${eur(bd.originalBillAnnual)}</div>
-                                    <div style="font-size: 11px; color: #666;">/ AÑO</div>
-                                </td>
-                                <td style="width: 50%; padding: 15px; background-color: ${BG_LIGHT}; border: 1px solid ${D_PRIMARY_MED}; text-align: center; vertical-align: top;">
-                                    <div style="font-size: 11px; font-weight: bold; color: ${D_PRIMARY_MED}; text-transform: uppercase;">TU NUEVO COSTE ${commercializadoraName}</div>
-                                    <div style="font-size: 24px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin: 5px 0; white-space: nowrap;">${eur(bd.totalAnnual)}</div>
-                                    <div style="font-size: 11px; color: ${D_PRIMARY_MED};">/ AÑO</div>
-                                    <div style="font-size: 13px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin-top: 5px; white-space: nowrap;">${eur(bd.totalAnnual/12)} / MES</div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td></tr>
-                    
-                    ${preciosResumenTable}
-                    
-                    <tr><td colspan="2"><div style="${sectionTitle}">DESGLOSE DETALLADO DE LA SIMULACIÓN (${commercialTariffName})</div></td></tr>
-                    <tr><td colspan="2" style="padding: 0 20px;">
-                        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 10px; margin-bottom: 20px; table-layout: fixed;">
-                            ${desgloseRows}
-                        </table>
-                    </td></tr>
-                    
-                    ${finalSavingsSummary}
+                        <tr><td colspan="2" style="padding: 0 20px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px; table-layout: fixed;">
+                                <tr>
+                                    <td style="width: 50%; padding: 15px; background-color: #f9fafb; border: 1px solid #ddd; text-align: center; vertical-align: top;">
+                                        <div style="font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase;">TU FACTURA ACTUAL</div>
+                                        <div style="font-size: 20px; font-weight: bold; color: #ef4444; margin: 5px 0; text-decoration: line-through; white-space: nowrap;">${eur(bd.originalBillAnnual)}</div>
+                                        <div style="font-size: 11px; color: #666;">/ AÑO</div>
+                                    </td>
+                                    <td style="width: 50%; padding: 15px; background-color: ${BG_LIGHT}; border: 1px solid ${D_PRIMARY_MED}; text-align: center; vertical-align: top;">
+                                        <div style="font-size: 11px; font-weight: bold; color: ${D_PRIMARY_MED}; text-transform: uppercase;">TU NUEVO COSTE ${commercializadoraName}</div>
+                                        <div style="font-size: 24px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin: 5px 0; white-space: nowrap;">${eur(bd.totalAnnual)}</div>
+                                        <div style="font-size: 11px; color: ${D_PRIMARY_MED};">/ AÑO</div>
+                                        <div style="font-size: 13px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin-top: 5px; white-space: nowrap;">${eur(bd.totalAnnual/12)} / MES</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
+                        
+                        ${preciosResumenTable}
+                        
+                        <tr><td colspan="2"><div style="${sectionTitle}">DESGLOSE DETALLADO DE LA SIMULACIÓN (${commercialTariffName})</div></td></tr>
+                        <tr><td colspan="2" style="padding: 0 20px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 10px; margin-bottom: 20px; table-layout: fixed;">
+                                ${desgloseRows}
+                            </table>
+                        </td></tr>
+                        
+                        ${finalSavingsSummary}
 
-                    <tr><td colspan="2" style="text-align: center; padding: 0 20px 20px 20px;">
-                        <a href="${formalizationLink}" style="${btnStyle}">QUIERO LA OFERTA</a>
-                        <p style="font-size: 10px; color: #999; margin-top: 10px;">[Colaborador: ${commercialCode}] | Este resumen es una simulación basada en su última factura.</p>
-                    </td></tr>
+                        <tr><td colspan="2" style="text-align: center; padding: 0 20px 20px 20px;">
+                            <a href="${formalizationLink}" style="${btnStyle}">QUIERO LA OFERTA</a>
+                            <p style="font-size: 10px; color: #999; margin-top: 10px;">[Colaborador: ${commercialCode}] | Este resumen es una simulación basada en su última factura.</p>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0; height: 10px;"><div style="${footerStyle}"></div></td></tr>
-                </table>`;
+                        <tr><td colspan="2" style="padding: 0; height: 10px;"><div style="${footerStyle}"></div></td></tr>
+                    </table>`;
         }
 
 
@@ -2066,7 +2099,7 @@
                 const powerPeriods = currentConfig.powerPeriods;
                 
                 // Determinar el nombre de la tarifa final aplicada
-                const appliedOfferName = resItem.offer.isDrk 
+                const appliedOfferName = resItem.offer.isDrk  
                     ? `${resItem.offer.name} - ${resItem.offer.description}` 
                     : resItem.offer.name;
 
@@ -2163,6 +2196,21 @@
             const formalizationRecipients = 'f.araujo@drk.es,r.guerra@drk.es,s.caballero@drk.es';  
             const formalizationLink = `mailto:${formalizationRecipients}?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
 
+            // --- NUEVO BANNER EN EL HTML DEL CORREO (Paso 2) ---
+            const logoHtml = `<span style="display: inline-block; width: 40px; height: 40px; margin-right: 10px; vertical-align: middle;">${BRANDS.DRK.LOGO_SVG.replace(/class="[^"]*"/g, 'width="40" height="40"')}</span>`;
+            const headerContent = `
+                <div style="text-align: center;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center;">
+                        ${logoHtml}
+                        <div style="text-align: left;">
+                            <h1 style="margin:0; font-size: 24px; font-weight: bold; line-height: 1.1;">DRK ENERGÍA</h1>
+                            <p style="margin:2px 0 0 0; font-size: 13px; opacity: 0.9; color: #f0f9ff;">Maximizando su Ahorro Eléctrico</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // --- FIN NUEVO BANNER EN EL HTML DEL CORREO ---
+            
             // --- Precios de la Oferta Consolidada (Dynamic Winner) ---
             
             let preciosConsolidadosHTML = '';
@@ -2244,60 +2292,59 @@
 
 
             return `<table cellpadding="0" cellspacing="0" style="${tableMain}">
-                    <tr><td colspan="2" style="${headerCell}">
-                        <h1 style="margin:0; font-size: 24px;">ESTUDIO CONSOLIDADO DE AHORRO</h1>
-                        <p style="margin:5px 0 0 0; font-size: 14px; opacity: 0.9;">ANÁLISIS DE ${individualResults.length} SUMINISTROS (2.0TD + 3.0TD)</p>
-                    </td></tr>
-                    
-                    <tr><td colspan="2" style="padding: 15px;">
-                        <p style="margin: 0; font-size: 13px;"><strong>CLIENTE:</strong> ${clientName}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>TOTAL CUPS:</strong> ${individualResults.length}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>OFERTA CONSOLIDADA:</strong> ${consolidatedTariffName}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>COMERCIAL:</strong> ${commercialCode || 'N/A'}</p>
-                    </td></tr>
+                        <tr><td colspan="2" style="${headerCell}">
+                            ${headerContent}
+                        </td></tr>
+                        
+                        <tr><td colspan="2" style="padding: 15px;">
+                            <p style="margin: 0; font-size: 13px;"><strong>CLIENTE:</strong> ${clientName}</p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>TOTAL CUPS:</strong> ${individualResults.length}</p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>OFERTA CONSOLIDADA:</strong> ${consolidatedTariffName}</p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px;"><strong>COMERCIAL:</strong> ${commercialCode || 'N/A'}</p>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0 20px;">
-                        <div style="text-align: center; margin: 25px 0 10px 0;">
-                            <p style="margin: 0; font-size: 16px; color: #555; font-weight: bold;">AHORRO ANUAL CONSOLIDADO:</p>
-                        </div>
-                        <div style="${savingsBox}">
-                            <span style="font-size: 38px; white-space: nowrap;">${eur(bd.savings)}</span>
-                            <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold;">¡AHORRO TOTAL PARA ${individualResults.length} SUMINISTROS!</p>
-                        </div>
-                    </td></tr>
+                        <tr><td colspan="2" style="padding: 0 20px;">
+                            <div style="text-align: center; margin: 25px 0 10px 0;">
+                                <p style="margin: 0; font-size: 16px; color: #555; font-weight: bold;">AHORRO ANUAL CONSOLIDADO:</p>
+                            </div>
+                            <div style="${savingsBox}">
+                                <span style="font-size: 38px; white-space: nowrap;">${eur(bd.savings)}</span>
+                                <p style="margin: 5px 0 0 0; font-size: 18px; font-weight: bold;">¡AHORRO TOTAL PARA ${individualResults.length} SUMINISTROS!</p>
+                            </div>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0 20px;">
-                        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px; table-layout: fixed;">
-                            <tr>
-                                <td style="width: 50%; padding: 15px; background-color: #f9fafb; border: 1px solid #ddd; text-align: center; vertical-align: top;">
-                                    <div style="font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase;">COSTE ACTUAL ANUAL</div>
-                                    <div style="font-size: 20px; font-weight: bold; color: #ef4444; margin: 5px 0; text-decoration: line-through; white-space: nowrap;">${eur(bd.originalBillAnnual)}</div>
-                                    <div style="font-size: 11px; color: #666;">/ AÑO</div>
-                                </td>
-                                <td style="width: 50%; padding: 15px; background-color: ${BG_LIGHT}; border: 1px solid ${D_PRIMARY_MED}; text-align: center; vertical-align: top;">
-                                    <div style="font-size: 11px; font-weight: bold; color: ${D_PRIMARY_MED}; text-transform: uppercase;">NUEVO COSTE ${D_BRAND_NAME.toUpperCase()} ANUAL</div>
-                                    <div style="font-size: 24px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin: 5px 0; white-space: nowrap;">${eur(bd.totalAnnual)}</div>
-                                    <div style="font-size: 11px; color: ${D_PRIMARY_MED};">/ AÑO</div>
-                                    <div style="font-size: 13px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin-top: 5px; white-space: nowrap;">${eur(bd.totalAnnual/12)} / MES</div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td></tr>
-                    
-                    ${preciosResumenSection}
-                    
-                    <tr><td colspan="2"><div style="background-color: ${D_PRIMARY_MED}; color: white; font-weight: bold; padding: 8px; font-size: 14px; margin-top: 10px;">DESGLOSE INDIVIDUAL DE AHORRO</div></td></tr>
-                    ${individualBreakdowns}
-                    
-                    ${finalMultiSavingsSummary}
+                        <tr><td colspan="2" style="padding: 0 20px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px; table-layout: fixed;">
+                                <tr>
+                                    <td style="width: 50%; padding: 15px; background-color: #f9fafb; border: 1px solid #ddd; text-align: center; vertical-align: top;">
+                                        <div style="font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase;">COSTE ACTUAL ANUAL</div>
+                                        <div style="font-size: 20px; font-weight: bold; color: #ef4444; margin: 5px 0; text-decoration: line-through; white-space: nowrap;">${eur(bd.originalBillAnnual)}</div>
+                                        <div style="font-size: 11px; color: #666;">/ AÑO</div>
+                                    </td>
+                                    <td style="width: 50%; padding: 15px; background-color: ${BG_LIGHT}; border: 1px solid ${D_PRIMARY_MED}; text-align: center; vertical-align: top;">
+                                        <div style="font-size: 11px; font-weight: bold; color: ${D_PRIMARY_MED}; text-transform: uppercase;">NUEVO COSTE ${D_BRAND_NAME.toUpperCase()} ANUAL</div>
+                                        <div style="font-size: 24px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin: 5px 0; white-space: nowrap;">${eur(bd.totalAnnual)}</div>
+                                        <div style="font-size: 11px; color: ${D_PRIMARY_MED};">/ AÑO</div>
+                                        <div style="font-size: 13px; font-weight: bold; color: ${D_PRIMARY_DARK}; margin-top: 5px; white-space: nowrap;">${eur(bd.totalAnnual/12)} / MES</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td></tr>
+                        
+                        ${preciosResumenSection}
+                        
+                        <tr><td colspan="2"><div style="background-color: ${D_PRIMARY_MED}; color: white; font-weight: bold; padding: 8px; font-size: 14px; margin-top: 10px;">DESGLOSE INDIVIDUAL DE AHORRO</div></td></tr>
+                        ${individualBreakdowns}
+                        
+                        ${finalMultiSavingsSummary}
 
-                    <tr><td colspan="2" style="text-align: center; padding: 0 20px 20px 20px;">
-                        <a href="${formalizationLink}" style="${btnStyle}">FORMALIZAR OFERTA CONSOLIDADA</a>
-                        <p style="font-size: 10px; color: #999; margin-top: 10px;">[Colaborador: ${commercialCode}] | Este resumen es una simulación consolidada.</p>
-                    </td></tr>
+                        <tr><td colspan="2" style="text-align: center; padding: 0 20px 20px 20px;">
+                            <a href="${formalizationLink}" style="${btnStyle}">FORMALIZAR OFERTA CONSOLIDADA</a>
+                            <p style="font-size: 10px; color: #999; margin-top: 10px;">[Colaborador: ${commercialCode}] | Este resumen es una simulación consolidada.</p>
+                        </td></tr>
 
-                    <tr><td colspan="2" style="padding: 0; height: 10px;"><div style="${footerStyle}"></div></td></tr>
-                </table>`;
+                        <tr><td colspan="2" style="padding: 0; height: 10px;"><div style="${footerStyle}"></div></td></tr>
+                    </table>`;
         }
 
         // --- MANEJO DE INPUTS MANUALES ---
@@ -2778,7 +2825,7 @@
                 // Best DRK is the DRK one with the lowest annual cost
                 if (r.offer.isDrk && r.offer.name !== 'Tu Tarifa Actual') {
                     if (!bestDrk || annualCost < bestDrk.totalAnnual) {
-                           bestDrk = r;
+                            bestDrk = r;
                     }
                 }
             });
@@ -2903,22 +2950,22 @@
                  // Custom parsing to handle quoted fields correctly
                  let lastIndex = 0;
                  while(match = regex.exec(row)){
-                      let val = match[1].replace(/^"|"$/g, '').replace(/""/g, '"');
-                      // If the first capture group starts with the delimiter, it means the content is empty or the previous field was empty.
-                      if (match.index > lastIndex) {
-                          // Add empty string for missed fields
-                          for (let j = 0; j < (match.index - lastIndex) / delimiter.length; j++) {
-                              values.push('');
-                          }
-                      }
-                      values.push(val.trim());
-                      lastIndex = match.index + match[0].length;
+                     let val = match[1].replace(/^"|"$/g, '').replace(/""/g, '"');
+                     // If the first capture group starts with the delimiter, it means the content is empty or the previous field was empty.
+                     if (match.index > lastIndex) {
+                         // Add empty string for missed fields
+                         for (let j = 0; j < (match.index - lastIndex) / delimiter.length; j++) {
+                             values.push('');
+                         }
+                     }
+                     values.push(val.trim());
+                     lastIndex = match.index + match[0].length;
                  }
                  // Add trailing empty fields
                  if (values.length < headers.length) {
-                      for (let j = values.length; j < headers.length; j++) {
-                          values.push('');
-                      }
+                     for (let j = values.length; j < headers.length; j++) {
+                         values.push('');
+                     }
                  }
 
 
@@ -2926,12 +2973,12 @@
 
                  let item = { cups_match: [tariffType] };
                  headers.forEach((h, idx) => {
-                      let val = values[idx];
-                       if (h.includes('price') || h.includes('potencia') || h === 'descuento') {
-                            val = parseFloat(val?.replace(',', '.') || 0);
-                            if(isNaN(val)) val = 0;
-                       }
-                       item[h] = val;
+                     let val = values[idx];
+                      if (h.includes('price') || h.includes('potencia') || h === 'descuento') {
+                          val = parseFloat(val?.replace(',', '.') || 0);
+                          if(isNaN(val)) val = 0;
+                      }
+                      item[h] = val;
                  });
 
                  item.isDrk = item.name?.toUpperCase().includes('DRK');
