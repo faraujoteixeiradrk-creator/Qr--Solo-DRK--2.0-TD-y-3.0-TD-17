@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <script>
-        // --- TAILWIND CONFIGURATION (Solo DRK y CTAs) ---
+        // --- TAILWIND CONFIGURATION (Solo DRK y CTA Colors) ---
         tailwind.config = {
             theme: {
                 extend: {
@@ -22,7 +22,7 @@
                             800: '#075985',
                             900: '#0c4a6e',
                         },
-                        // powercup colors removed
+                        // Colores para asegurar el verde de resultados y el rojo de peligro/CTA de copia
                         'cta-green': {
                             500: '#16a34a', /* Usado para los ahorros */
                             600: '#15803d',
@@ -44,7 +44,7 @@
         .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilos de los botones de selección de tarifa (Solo DRK Hover Styles) */
+        /* Estilos de los botones de selección de tarifa (Landing Page) - Forzado a DRK */
         .tariff-select-btn {
             display: flex;
             align-items: center;
@@ -57,6 +57,7 @@
             border: 1px solid #e2e8f0; /* slate-200 */
         }
         
+        /* DRK Active Hover Styles (Default) */
         .tariff-select-btn:hover {
             border-color: #0ea5e9; /* drk-500 */
             background-color: #f0f9ff; /* drk-50 */
@@ -169,19 +170,13 @@
                     </svg>
                 </div>
                 <h2 id="landing-title" class="text-3xl font-black text-drk-900 mb-2 text-center">DRK COMPARADOR</h2>
-                <p class="text-slate-500 mb-6 text-center">Selecciona el tipo de contrato que deseas analizar.</p>
+                <p class="text-slate-500 mb-6 text-center">Selecciona la tarifa que deseas analizar.</p>
                 
-                <!-- Comparison Mode Selector (REMOVED - Fixed to DRK Prioritario) -->
-                <div id="mode-selector-container" class="mb-8 pt-4 border-t border-slate-200">
-                    <p class="text-sm font-bold text-drk-800 mb-3 text-center uppercase tracking-wider">MODO DE COMPARACIÓN</p>
-                    <div class="bg-drk-500 text-white p-3 rounded-lg text-center font-bold">
-                        DRK PRIORITARIO (Muestra la mejor oferta DRK con Ahorro)
-                    </div>
-                </div>
+                <!-- Comparison Mode Selector - REMOVED -->
                 
                 <!-- Tariff Selection Buttons -->
                 <div class="w-full space-y-4">
-                    <button onclick="selectTariffType('MULTICUPS')" class="tariff-select-btn group">
+                    <button onclick="selectTariffType('MULTICUPS')" class="tariff-select-btn group border-drk-300 hover:border-drk-500">
                         <div class="icon-wrapper bg-drk-50 text-drk-600 group-hover:bg-drk-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>
                         </div>
@@ -192,7 +187,7 @@
                         <span class="arrow-icon group-hover:text-drk-500">&rarr;</span>
                     </button>
 
-                    <button onclick="selectTariffType('2.0TD')" class="tariff-select-btn group">
+                    <button onclick="selectTariffType('2.0TD')" class="tariff-select-btn group border-drk-300 hover:border-drk-500">
                         <div class="icon-wrapper bg-drk-50 text-drk-600 group-hover:bg-drk-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                         </div>
@@ -203,7 +198,7 @@
                         <span class="arrow-icon group-hover:text-drk-500">&rarr;</span>
                     </button>
 
-                    <button onclick="selectTariffType('3.0TD')" class="tariff-select-btn group">
+                    <button onclick="selectTariffType('3.0TD')" class="tariff-select-btn group border-drk-300 hover:border-drk-500">
                         <div class="icon-wrapper bg-drk-50 text-drk-600 group-hover:bg-drk-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.18a2 2 0 0 0 1.51-.72L11 1l2 2h3.18a2 2 0 0 1 1.51.72L20 5h1.18a2 2 0 0 1 2 2z"></path><path d="M14 9H8v8h8V9z"></path></svg>
                         </div>
@@ -235,7 +230,7 @@
         <!-- 2. MultiCups Saga View (Intermediate Step) -->
         <div id="multicups-saga-view" class="fade-in hidden flex flex-col items-center justify-center min-h-[60vh] py-8">
             <button onclick="resetToLanding()" class="mb-4 text-sm text-slate-500 hover:text-drk-600 flex items-center gap-1">
-                &larr; Volver a selección de modo
+                &larr; Volver a selección de tarifa
             </button>
             
             <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full border-t-4 border-drk-500 relative" id="multicups-saga-card">
@@ -299,7 +294,15 @@
                 </div>
                 
                 
-                <div id="initial-icon-bg" class="w-16 h-16 bg-drk-50 rounded-full flex items-center justify-center mx-auto mb-4 text-drk-600"></div>
+                <div id="initial-icon-bg" class="w-16 h-16 bg-drk-50 rounded-full flex items-center justify-center mx-auto mb-4 text-drk-600">
+                     <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
+                        <style>.drk-ring{fill:none;stroke-width:10;stroke-linecap:round;}</style>
+                        <circle class="drk-ring" cx="45" cy="45" r="35" stroke="#E50000"/>
+                        <circle class="drk-ring" cx="55" cy="55" r="35" stroke="#FFCC00"/>
+                        <circle class="drk-ring" cx="45" cy="55" r="35" stroke="#0079C1"/>
+                        <circle class="drk-ring" cx="55" cy="45" r="35" stroke="#00A859"/>
+                    </svg>
+                </div>
                 
                 <h2 class="text-2xl font-bold text-slate-800 mb-2">Analizar Factura</h2>
                 <p class="text-slate-500 mb-6" id="scan-instruction-text">Escanea el código QR o introduce datos manualmente.</p>
@@ -523,7 +526,7 @@
     <textarea id="paste-catcher" aria-hidden="true" title="Área de pegado (invisible)"></textarea>
 
     <script>
-        // --- CONFIGURACIÓN DE TIPO DE TARIFAS (SIN 6.1TD) ---
+        // --- CONSTANTES DRK (HARDCODED) ---
         const TARIFF_CONFIG = {
             '2.0TD': { sheetId: '19CBiWVvxHoWW0fqdbSbLGs-hoISQGORAfebBztFYi3w', periods: 3, powerPeriods: 2, label: '2.0 TD', isHighVoltage: false, requiresQR: true, isMulti: false },
             '3.0TD': { sheetId: '18nieA7yMD9Ytc2Z3EnktoNDZokuMrBet_ETGyhNZDuo', periods: 6, powerPeriods: 6, label: '3.0 TD', isHighVoltage: true, requiresQR: false, isMulti: false },
@@ -538,7 +541,7 @@
                 QR_TEXT: 'DRK',
                 QR_BORDER_COLOR: '#0ea5e9', // drk-500
                 QR_CENTER_BG: '#075985', // drk-800
-                PRIMARY_BG_GRADIENT: 'from-drk-800 to-drk-600', 
+                PRIMARY_BG_GRADIENT: 'from-drk-800 to-drk-600',
                 PRIMARY_BUTTON: 'from-drk-600 to-drk-800 hover:from-drk-700 hover:to-drk-900', // ESCANEAR QR
                 SECONDARY_BUTTON_BG: 'bg-drk-50', // OPCIONES QR MANUAL / DATOS A MANO BG
                 SECONDARY_BUTTON_TEXT: 'text-drk-800', // OPCIONES QR MANUAL / DATOS A MANO Text
@@ -547,7 +550,6 @@
                 NAV_BG: 'bg-drk-900', NAV_SUBTITLE_BG: 'bg-drk-800', NAV_SUBTITLE_TEXT: 'text-drk-100'
             }
         };
-
         const EXTERNAL_APP_URL = 'https://faraujoteixeiradrk-creator.github.io/CALCULADORA-DRK-POWER-QR-CAMBIANDO-COLORES-DESCUENTO-y-DESCAR-TLF--2.0-TD-3.0-TD-6.1TD/';
         
         // Estado Global
@@ -557,9 +559,9 @@
         };
         let currentTariffType = '2.0TD';
         let lastComparisonResult = null;
-        let comparisonMode = 'drk_prioritized'; // MODO FIJO: DRK Prioritario
-        let activeBrand = BRANDS.DRK; // MARCA FIJA: DRK
-        
+        let activeBrand = BRANDS.DRK; // Hardcoded to DRK
+        let qrCodeInstance = null; // Instancia de QRCode.js
+
         // Estado Multicups
         let multiCupsData = [];
         let tempQrData = null; // Almacenamiento temporal para datos de QR antes de la confirmación
@@ -574,7 +576,7 @@
         const num = (n, d=2) => new Intl.NumberFormat('es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n || 0);
         const numPriceFormula = (n) => new Intl.NumberFormat('es-ES', { minimumFractionDigits: 6, maximumFractionDigits: 6 }).format(n || 0);
 
-        // Función para obtener las ofertas GANADORAS (no necesariamente DRK) consolidadas por tipo.
+        // Función para obtener las ofertas GANADORAS DRK consolidadas por tipo.
         function getWinningOffersPerType(results) {
             const winningOffers = { '2.0TD': null, '3.0TD': null };
             let hasDrkWinner = false;
@@ -589,8 +591,8 @@
                 }
 
                 // Collect the winning offer for this type
-                if (type === '2.0TD' || type === '3.0TD') {
-                    const key = type; 
+                if (type === '2.0TD' || type === '3.0TD' || type === '6.1TD') {
+                    const key = (type === '6.1TD' ? '3.0TD' : type); 
                     
                     if (winnerOffer.name !== 'Tu Tarifa Actual' && (!winningOffers[key] || resItem.totalAnnual < winningOffers[key].totalAnnual)) {
                         winningOffers[key] = {
@@ -615,8 +617,7 @@
         };
 
         function setModalContent(msg, title, isError) {
-            const brand = activeBrand;
-            const basePrefix = 'drk'; // Fixed to DRK
+            const basePrefix = 'drk'; 
             
             document.getElementById('error-title').textContent = title;
             document.getElementById('error-message').textContent = msg;
@@ -714,181 +715,14 @@
             });
         }
         
-        // Función para aplicar estilos de marca (Simplificada a DRK únicamente)
-        function applyBrandStyles(brand) {
-            brand = BRANDS.DRK;
-            activeBrand = brand;
-            
-            const accent500 = 'drk-500';
-            const bg50 = 'bg-drk-50';
-            const text800 = 'text-drk-800';
-            const borderColor = 'border-drk-500';
-            
-            // 1. NAVBAR
-            document.getElementById('app-logo-main').textContent = 'DRK';
-            document.getElementById('app-logo-accent').textContent = brand.ACCENT_TEXT;
-            document.getElementById('app-logo-accent').className = `text-${brand.ACCENT}`;
-
-            document.getElementById('navbar').className = `w-full ${brand.NAV_BG} text-white p-4 shadow-md sticky top-0 z-50 transition-colors duration-300`;
-            document.getElementById('app-subtitle').className = `text-xs ${brand.NAV_SUBTITLE_BG} px-2 py-1 rounded ${brand.NAV_SUBTITLE_TEXT}`;
-
-            // 2. LANDING PAGE CONTENT
-            document.getElementById('landing-title').textContent = brand.TITLE; // Set main title in CAPS
-            document.getElementById('landing-icon-bg').className = `w-16 h-16 ${bg50} rounded-full flex items-center justify-center mx-auto mb-4 ${text800} shadow-inner`;
-            document.getElementById('landing-icon-bg').innerHTML = brand.LOGO_SVG; // Set main logo
-
-            // 3. INITIAL VIEW ICON (Used when user proceeds to scan view)
-            document.getElementById('initial-icon-bg').className = `w-16 h-16 ${bg50} rounded-full flex items-center justify-center mx-auto mb-4 ${text800} shadow-inner`;
-            document.getElementById('initial-icon-bg').innerHTML = brand.LOGO_SVG;
-            // Also apply to Saga View
-            const sagaIcon = document.getElementById('initial-icon-bg-saga');
-            if (sagaIcon) {
-                sagaIcon.className = `w-16 h-16 ${bg50} rounded-full flex items-center justify-center mx-auto mb-4 ${text800} shadow-inner`;
-                sagaIcon.innerHTML = brand.LOGO_SVG;
-            }
-            
-            // 4. MAIN ACTION BUTTONS (Scanner/Input View)
-            const primaryButtonClass = `w-full bg-gradient-to-r ${brand.PRIMARY_BUTTON} text-white font-bold py-4 px-6 rounded-2xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3 mb-3`;
-            const startScanBtn = document.getElementById('start-scan-btn');
-            if (startScanBtn) startScanBtn.className = primaryButtonClass; // Apply to scan button if visible
-
-            const secondaryButtonBase = `w-full ${brand.SECONDARY_BUTTON_BG} hover:bg-drk-100 ${brand.SECONDARY_BUTTON_TEXT} font-bold py-3 px-6 rounded-xl shadow-sm transform transition active:scale-95 flex items-center justify-center gap-3`;
-            const uploadMenuBtn = document.getElementById('upload-menu-btn');
-            if (uploadMenuBtn) uploadMenuBtn.className = secondaryButtonBase; // Apply to upload button if visible
-            
-            // Apply unique style to Manual Input button
-            const manualInputBtn = document.getElementById('manual-input-btn');
-            if (manualInputBtn) {
-                // Limpiar clases de color/fondo
-                manualInputBtn.className = manualInputBtn.className.split(' ').filter(c => 
-                    !c.startsWith('bg-') && !c.startsWith('hover:bg-') && !c.startsWith('text-') && !c.includes('from-') && !c.includes('to-')
-                ).join(' ');
-                
-                // If it's 3.0TD (where QR is hidden), use the Primary style for manual input
-                const isManualPrimary = currentTariffType !== 'MULTICUPS' && !TARIFF_CONFIG[currentTariffType]?.requiresQR;
-                
-                if (isManualPrimary) {
-                    manualInputBtn.classList.add('w-full', 'text-white', 'font-bold', 'py-4', 'px-6', 'rounded-2xl', 'shadow-lg', 'transform', 'transition', 'active:scale-95', 'flex', 'items-center', 'justify-center', 'gap-3');
-                    manualInputBtn.classList.add('bg-gradient-to-r', 'from-drk-600 to-drk-800 hover:from-drk-700 hover:to-drk-900');
-                } else { // DRK active or 2.0TD flow (uses secondary style)
-                    manualInputBtn.classList.add('w-full', 'font-bold', 'py-3', 'px-6', 'rounded-xl', 'shadow-sm', 'transform', 'transition', 'active:scale-95', ...brand.SECONDARY_BUTTON_BG.split(' '), ...brand.SECONDARY_BUTTON_TEXT.split(' '));
-                }
-
-                // Re-add mt-3 if QR buttons are visible
-                if (!document.getElementById('qr-buttons-container')?.classList.contains('hidden')) {
-                    manualInputBtn.classList.add('mt-3');
-                } else {
-                    manualInputBtn.classList.remove('mt-3');
-                }
-            }
-            
-            const focusColorClass = 'focus:border-drk-500'; 
-            const calcBtnBg = 'bg-drk-500 hover:bg-drk-600';
-            
-            // 5. MANUAL INPUT MODAL STYLES
-            const manualModal = document.getElementById('manual-input-modal');
-            manualModal.querySelector('h3#manual-modal-title').className = `text-xl font-bold ${text800} mb-4`;
-            manualModal.querySelectorAll('input[type="text"], input[type="number"], select').forEach(input => {
-                input.classList.remove('focus:border-drk-500', 'focus:border-powercup-500');
-                input.classList.add(focusColorClass);
-            });
-            manualModal.querySelector('#execute-manual-input-btn').className = `w-full text-white font-bold py-3 rounded-xl shadow-md mb-3 ${calcBtnBg}`;
-
-            // 6. QR OPTIONS MODAL STYLES (Modal 8)
-            const qrOptionsModal = document.getElementById('qr-options-modal');
-            qrOptionsModal.querySelector('h3#modal-qr-title').className = `text-xl font-bold ${text800} mb-4`;
-
-            const uploadBtn = document.getElementById('modal-upload-file-btn');
-            const pasteBtn = document.getElementById('modal-paste-image-btn');
-            
-            if (uploadBtn) {
-                uploadBtn.className = `w-full text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3 transform transition active:scale-95 bg-drk-800 hover:bg-drk-900`;
-            }
-
-            if (pasteBtn) {
-                pasteBtn.className = `w-full text-white font-bold py-3 px-6 rounded-xl shadow-md mb-4 transform transition active:scale-95 bg-drk-600 hover:bg-drk-800`;
-            }
-
-            // 7. QR CONFIRM MODAL STYLES (Modal 7)
-            const qrConfirmModal = document.getElementById('qr-confirm-modal');
-            qrConfirmModal.querySelector('h3').className = `text-xl font-bold ${text800} mb-2`;
-            qrConfirmModal.querySelector('#confirm-save-supply-btn').className = `w-full text-white font-bold py-3 rounded-xl shadow-md mb-3 ${calcBtnBg}`;
-
-            // 8. SCANNER VIEW
-            document.getElementById('scanner-guide').classList.remove('border-drk-500', 'border-powercup-500');
-            document.getElementById('scanner-guide').classList.add(borderColor);
-            
-            const captureBtn = document.getElementById('capture-photo-btn');
-            if (captureBtn) {
-                captureBtn.classList.remove('border-drk-500', 'text-drk-800', 'border-powercup-500', 'text-powercup-800');
-                captureBtn.classList.add('border-2', 'bg-white', borderColor, text800);
-            }
-
-            document.getElementById('paste-catcher').style.setProperty('--qr-border-color', brand.QR_BORDER_COLOR);
-
-
-            // 9. Result Header Gradient & Card Borders
-            document.getElementById('result-header').className = `bg-gradient-to-r ${brand.PRIMARY_BG_GRADIENT} p-6 text-white text-center relative overflow-hidden`;
-            document.getElementById('initial-card').className = `bg-white p-6 rounded-3xl shadow-xl text-center border-t-4 ${borderColor} relative`;
-            document.getElementById('landing-card').className = `bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full border-t-4 ${borderColor}`;
-            
-            const sagaCard = document.getElementById('multicups-saga-card');
-            if (sagaCard) sagaCard.className = `bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full border-t-4 ${borderColor} relative`;
-
-            // 10. TARIFF BADGE COLOR (In Initial View)
-            const tariffBadge = document.getElementById('tariff-badge');
-            tariffBadge.classList.remove('bg-drk-500', 'bg-powercup-500');  
-            tariffBadge.classList.add(`bg-${accent500}`);
-
-            // 11. Landing Page Tariff Buttons 
-            document.querySelectorAll('.tariff-select-btn').forEach(btn => {
-                const iconWrapper = btn.querySelector('.icon-wrapper');
-                const arrowIcon = btn.querySelector('.arrow-icon');
-                
-                // Limpiar clases de color
-                iconWrapper.className = iconWrapper.className.split(' ').filter(c => !c.startsWith('bg-') && !c.startsWith('text-') && !c.startsWith('group-hover')).join(' ');
-                arrowIcon.classList.remove('group-hover:text-drk-500', 'group-hover:text-powercup-500');
-                btn.classList.remove('border-drk-300', 'hover:border-drk-500', 'border-powercup-300', 'hover:border-powercup-500');
-
-                // Apply DRK styles
-                iconWrapper.classList.add('bg-drk-50', 'group-hover:bg-drk-100', 'text-drk-600');
-                arrowIcon.classList.add('group-hover:text-drk-500');
-                btn.classList.add('border-drk-300', 'hover:border-drk-500');
-                
-            });
-        }
-        
-        // --- FUNCIONES DE LIMPIEZA ---
-
-        function clearManualInputs(prefix = 'input') {
-            document.getElementById(`${prefix}-cups`).value = '';
-            document.getElementById(`${prefix}-billing-days`).value = '';
-            document.getElementById(`${prefix}-total-bill`).value = '';
-            for (let i = 1; i <= 6; i++) {
-                const pInput = document.getElementById(`${prefix}-p${i}-kw`);
-                if (pInput) pInput.value = '';
-                const eInput = document.getElementById(`${prefix}-e${i}-kwh`);
-                if (eInput) eInput.value = '';
-            }
-        }
-        
-        function closeManualInputModal() {
-            document.getElementById('manual-input-modal').classList.add('hidden');
-            document.getElementById('manual-input-modal').classList.remove('flex');
-            // Si estábamos en modo MultiCups, volvemos al selector 2.0/3.0
-            if (currentTariffType === 'MULTICUPS') {
-                showMultiCupsSagaView();
-            }
-        }
-
         function resetToLanding() {
             stopScanner();
             lastComparisonResult = null;
             multiCupsData = []; // Limpiar datos de multicups
             multiCupsAddType = null; // NEW: Reset sub-type
             
-            // Restore the active brand (only DRK now)
-            applyBrandStyles(BRANDS.DRK); 
+            // Re-apply DRK colors to paste catcher (hardcoded DRK)
+            document.getElementById('paste-catcher').style.setProperty('--qr-border-color', BRANDS.DRK.QR_BORDER_COLOR);
             
             document.getElementById('landing-view').classList.remove('hidden');
             document.getElementById('initial-view').classList.add('hidden');
@@ -941,7 +775,6 @@
                 document.getElementById('manual-input-btn').textContent = "DATOS A MANO";
                 document.getElementById('multicups-finalize-btn-main').classList.add('hidden');
                 
-                // --- FIX: Loading status displayed during fetch (Issue 1) ---
                 document.getElementById('loading-status').textContent = `Cargando tarifas ${config.label}...`;
                 document.getElementById('loading-status').classList.remove('hidden');
                 document.getElementById('tariff-display-badge').textContent = '0';
@@ -972,18 +805,19 @@
                 fetchTariffsFromSheet(currentTariffType);
 
                 if (document.getElementById('qr-toggle-checkbox').checked) {
-                    generateQRCode(activeBrand);
+                    generateQRCode();
                 }
             }
         }
         
-        function generateQRCode(brand) {
+        function generateQRCode() { // Simplified: removed (brand) parameter
+            const brand = BRANDS.DRK; // Hardcoded to DRK
             const qrContainer = document.getElementById('qr-code-container');
             const qrVisualContainer = document.getElementById('qr-visual-container');
 
             // En modo MULTICUPS el QR siempre enlaza con 2.0TD ya que es el único compatible con QR
-            const tariffParam = currentTariffType === 'MULTICUPS' ? '2.0TD' : currentTariffType;  
-            const fullUrl = `${brand.QR_URL}?tariff=${tariffParam}`;  
+            const tariffParam = currentTariffType === 'MULTICUPS' ? '2.0TD' : currentTariffType;
+            const fullUrl = `${brand.QR_URL}?tariff=${tariffParam}`;
 
             qrContainer.innerHTML = '';
             qrCodeInstance = null;
@@ -1005,7 +839,7 @@
         // --- CÁLCULOS Y COMPARACIÓN INDIVIDUAL/MULTICUPS ---
         
         function calculateDays(startDateStr, endDateStr) {
-              try {
+             try {
                 const [d1, m1, y1] = startDateStr.split('/').map(Number);
                 const [d2, m2, y2] = endDateStr.split('/').map(Number);
 
@@ -1017,23 +851,23 @@
                 const ONE_DAY_MS = 1000 * 60 * 60 * 24;
                 const diffDays = (date2.getTime() - date1.getTime()) / ONE_DAY_MS;
                 return Math.round(diffDays) + 1;
-              } catch (e) {
+             } catch (e) {
                 return 30;
-              }
+             }
         }
         
         const formatIsoToDmy = (iso) => {
-              if (!iso) return null;
-              const parts = iso.split('-');
-              if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;  
-              return null;
+             if (!iso) return null;
+             const parts = iso.split('-');
+             if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;  
+             return null;
         };
 
         function calculateTariffCost(tariff, data, tariffType) {
             const IVA_RATE = 0.21;
             const IE_RATE = 0.05113; // Impuesto Eléctrico base
             const ANNUAL_DAYS = 365;
-            const config = TARIFF_CONFIG[tariffType] || TARIFF_CONFIG['3.0TD']; // Fallback to 3.0TD
+            const config = TARIFF_CONFIG[tariffType] || TARIFF_CONFIG['3.0TD']; // Fallback a 3.0TD si es 6.1TD
             
             let subPower = 0;
             let powerCosts = [];
@@ -1062,7 +896,7 @@
                     kwh = i === 1 ? data.consumo_punta : i === 2 ? data.consumo_llano : i === 3 ? data.consumo_valle : 0;
                     price = tariff[`p${i}_price`] || 0;
                 } else {
-                    // 3.0TD usan nombres de campo genéricos (consumo_p1, consumo_p2, etc)
+                    // 3.0TD/6.1TD usan nombres de campo genéricos (consumo_p1, consumo_p2, etc)
                     kwh = data[`consumo_p${i}`] || 0;
                     price = tariff[`p${i}_price`] || 0;
                 }
@@ -1115,17 +949,17 @@
 
         function compareOffers(data) {
             const tariffType = currentTariffType;  
-            const tariffsToCompare = currentTariffs[tariffType] || [];
+            const tariffKey = tariffType === '6.1TD' ? '3.0TD' : tariffType;
+            const tariffsToCompare = currentTariffs[tariffKey] || [];
 
-            if (tariffsToCompare.length === 0) return window.showErrorModal(`Las tarifas ${tariffType} no están cargadas.`);
+            if (tariffsToCompare.length === 0) return window.showErrorModal(`Las tarifas ${tariffKey} no están cargadas.`);
 
             const results = tariffsToCompare.map(t => calculateTariffCost(t, data, tariffType));
             
-            let bestOverall = null;
-            let bestDrk = null;
+            let bestOverall = null; // Absolute best (DRK or Competitor)
+            let bestDrk = null; // Best DRK only
 
             results.forEach(r => {
-                // Siempre comparamos por el coste anual
                 const annualCost = r.totalAnnual;
                 
                 // Best overall is the one with the lowest annual cost
@@ -1145,22 +979,14 @@
             
             let final = bestOverall;
             
-            // Aplicar lógica de modo de comparación (Fijo a DRK Prioritario)
-            if (comparisonMode === 'drk_prioritized') {
-                // DRK PRIORITARIO: Usar la mejor DRK si ofrece ahorro (>0). Si no ofrece ahorro, usar la mejor overall.
-                if (bestDrk && bestDrk.totalAnnual < bestDrk.originalBillAnnual) {
-                    final = bestDrk;
-                } else {
-                    final = bestOverall;
-                }
-            } else if (comparisonMode === 'drk_only') { // This logic path exists but is not used in the fixed UI
-                if (bestDrk && bestDrk.totalAnnual < bestDrk.originalBillAnnual) {
-                    final = bestDrk;
-                } else {
-                    final = bestOverall;
-                }
-            } 
-            
+            // FORCED DRK PRIORITIZED LOGIC:
+            // Use the best DRK if it offers savings (>0). If not, use the best overall (which is guaranteed to be 'Tu Tarifa Actual' if there are no savings)
+            if (bestDrk && bestDrk.totalAnnual < bestDrk.originalBillAnnual) {
+                final = bestDrk;
+            } else {
+                final = bestOverall;
+            }
+
             // Re-calculate the final savings based on the selected 'final' result's annual cost
             final.savings = final.originalBillAnnual - final.totalAnnual;
             if (final.savings <= 0) {
@@ -1174,11 +1000,7 @@
 
             lastComparisonResult = final;
             
-            // Definir marca activa para la UI de resultados (Siempre DRK si es DRK, si no la Tarifa Actual)
-            // Ya que el modo es DRK Prioritario, el branding será DRK, a menos que no haya ahorro.
-            let brand = BRANDS.DRK; 
-            
-            applyBrandStyles(brand);
+            // Branding is always DRK for the UI
             renderResultsUI(final);
             
             document.getElementById('initial-view').classList.add('hidden');
@@ -1267,8 +1089,6 @@
             }
             
             manualInputBtn.textContent = "AÑADIR SUMINISTRO MANUAL";
-            // Asegurarse de aplicar los estilos correctos al botón manual
-            applyBrandStyles(activeBrand);  
             // Ocultar status de carga, ya que ya están cargadas desde la vista SAGA
             document.getElementById('loading-status').classList.add('hidden');
         }
@@ -1298,9 +1118,7 @@
                 for (let i = 1; i <= 6; i++) {
                     const kwKey = `potencia_p${i}_kw`;
                     if (current[kwKey] !== undefined) {
-                        // Use the type for grouping. 
                         const groupKey = (type === '2.0TD' ? '2.0TD' : '3.0TD');
-                        // Store only if the power period is relevant for the type, otherwise it's just zero.
                         if (TARIFF_CONFIG[type]?.powerPeriods >= i || type === '3.0TD') {
                             acc.aggregatedData[groupKey].power[`p${i}`] += current[kwKey] || 0;
                         }
@@ -1308,14 +1126,12 @@
                 }
 
                 // General Energy Accumulation (E1-E6)
-                // Use consumption names based on the type, but store generically
                 if (type === '2.0TD') {
                     acc.aggregatedData[type].energy.e1 += current.consumo_punta || 0;
                     acc.aggregatedData[type].energy.e2 += current.consumo_llano || 0;
                     acc.aggregatedData[type].energy.e3 += current.consumo_valle || 0;
                 } else if (type === '3.0TD') {
                     for (let i = 1; i <= 6; i++) {
-                        // For 3.0TD, fields are named consumo_p1 to consumo_p6
                         acc.aggregatedData['3.0TD'].energy[`e${i}`] += current[`consumo_p${i}`] || 0;
                     }
                 }
@@ -1325,7 +1141,7 @@
                 originalBillAnnual: 0,
                 totalAnnual: 0,
                 totalPeriod: 0,
-                diasFacturados: 0, // Not accurately summable/averagable, kept as 0/N/A for summary
+                diasFacturados: 0, 
                 aggregatedData: {
                     '2.0TD': { power: { p1: 0, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0 }, energy: { e1: 0, e2: 0, e3: 0, e4: 0, e5: 0, e6: 0 } },
                     '3.0TD': { power: { p1: 0, p2: 0, p3: 0, p4: 0, p5: 0, p6: 0 }, energy: { e1: 0, e2: 0, e3: 0, e4: 0, e5: 0, e6: 0 } }
@@ -1349,35 +1165,35 @@
                 bestOverallWinner.offer = { name: "Tu Tarifa Actual", description: "Es la mejor opción consolidada", isDrk: false };
                 total.savings = 0; // Ensure consistency
             } else {
-                // Ahorro positivo: Usar un nombre genérico para la cabecera.
-                const genericName = "Tu Mejor Elección DRK";
-                const genericDescription = `Ofrece el mayor ahorro consolidado con DRK Energía.`;
+                // Ahorro positivo: Usar un nombre genérico para la cabecera, y forzar branding DRK
+                const genericName = "Tu Mejor Elección";
+                const brandName = 'DRK Energía'; // Hardcoded
+                const genericDescription = `Ofrece el mayor ahorro consolidado con ${brandName}.`;
 
                 bestOverallWinner.offer = { 
                     name: genericName, 
                     description: genericDescription, 
-                    isDrk: true 
+                    isDrk: true // Hardcoded to DRK for MultiCups header if saving money
                 };
             }
 
             const finalResult = {
                 cups: `${multiCupsData.length} CUPS`, // String for display
                 multiCupsList: multiCupsData.map(d => `${d.cups} (${d.originalTariffType})`).join(', '),
-                dias_facturados: total.diasFacturados, // Should remain N/A or 0 for multi-cups
+                dias_facturados: total.diasFacturados, 
                 importe_total: total.totalPeriod,
                 originalBillAnnual: total.originalBillAnnual,
                 totalAnnual: total.totalAnnual,
                 savings: total.savings,
-                offer: bestOverallWinner.offer, // Use the (potentially generic) offer for the header display
+                offer: bestOverallWinner.offer,
                 isMulti: true,
-                individualResults: multiCupsData, // Añadir resultados individuales para el desglose HTML
+                individualResults: multiCupsData,
                 aggregatedData: total.aggregatedData
             };
             
             lastComparisonResult = finalResult;
             
-            // Set the active brand for the UI based on the comparison mode (only DRK)
-            applyBrandStyles(BRANDS.DRK);
+            // Branding is always DRK
             
             renderMultiResultsUI(finalResult);
             
@@ -1395,7 +1211,7 @@
          */
         function renderMultiResultsUI(res) {
             const offer = res.offer;
-            const brand = activeBrand; // Fixed to DRK
+            const brand = BRANDS.DRK; // Hardcoded to DRK
             const individualResults = res.individualResults;
             const aggregatedData = res.aggregatedData;
             
@@ -1410,7 +1226,7 @@
             `;
 
             // MODIFICACIÓN: Mostrar Nombre y Descripción.
-            if (res.isMulti && res.savings > 0 && offer.name.includes("Tu Mejor Elección")) {
+            if (res.isMulti && res.savings > 0 && offer.name === "Tu Mejor Elección") {
                 document.getElementById('best-offer-name').textContent = offer.name;
                 document.getElementById('best-offer-desc').textContent = offer.description;
             } else {
@@ -1431,7 +1247,7 @@
 
             if (res.savings <= 0) {
                 savingsEl.textContent = "0,00 €";
-                savingsEl.classList.add(brand.PRIMARY_TEXT.split('-')[1]);
+                savingsEl.classList.add('text-drk-800');
                 newCostLabelEl.textContent = "TU COSTE ACTUAL CONSOLIDADO";
                 oldCostPeriodEl.classList.remove('line-through'); // Remove red line-through
                 oldCostPeriodEl.classList.add('text-cta-green-500');
@@ -1456,7 +1272,6 @@
             
             // 2. Nuevo: Resumen de Suministros (Tipo, CUPS, Ahorro Individual)
             let summaryListHTML = individualResults.map((resItem, index) => {
-                // MODIFICACIÓN #2: Eliminar "Sin Ahorro" en la vista interna, dejando un espacio.
                 const savingsText = resItem.isNegativeSavings ? `&nbsp;` : `(Ahorro: ${eur(resItem.savings)})`;
                 return `<div class="flex justify-between items-center py-1 border-b border-slate-100 last:border-b-0">
                     <span class="font-bold text-sm text-slate-700">${resItem.cups}</span>
@@ -1514,15 +1329,15 @@
                     }
                 }
 
-                const title = is20TD ? '2.0 TD (Hogar/Negocio)' : '3.0 TD (Industria)';
+                const title = is20TD ? '2.0 TD (Hogar/Negocio)' : '3.0 TD / 6.1 TD (Industria)';
 
                 return `
                     <div class="border-t pt-4 mt-4 first:border-t-0 first:pt-0 first:mt-0">
-                        <p class="font-black text-base ${brand.PRIMARY_TEXT} mb-3">${title}</p>
+                        <p class="font-black text-base text-drk-800 mb-3">${title}</p>
                         
                         <p class="font-bold text-slate-700 mt-2 mb-1">Consumos (kWh)</p>
                         ${energyRows || '<p class="text-xs text-slate-400">No hay consumos para este tipo.</p>'}
-                        ${totalGroupEnergy > 0 ? `<div class="flex justify-between font-bold ${brand.PRIMARY_TEXT} mt-1 border-t pt-1 border-slate-200"><span>Total Consumo ${type}</span><span>${num(totalGroupEnergy, 0)} kWh</span></div>` : ''}
+                        ${totalGroupEnergy > 0 ? `<div class="flex justify-between font-bold text-drk-800 mt-1 border-t pt-1 border-slate-200"><span>Total Consumo ${type}</span><span>${num(totalGroupEnergy, 0)} kWh</span></div>` : ''}
                         
                         <p class="font-bold text-slate-700 mt-4 mb-1">Potencias (kW)</p>
                         ${powerRows || '<p class="text-xs text-slate-400">No hay potencias para este tipo.</p>'}
@@ -1537,7 +1352,7 @@
             const correctedConsumptionHTML = `
                 <div class="grid grid-cols-1 gap-4">
                     <div class="col-span-1 border-b pb-2 mb-2">
-                        <div class="flex justify-between items-center ${brand.PRIMARY_TEXT}">
+                        <div class="flex justify-between items-center text-drk-800">
                             <span class="text-sm font-black uppercase">GRAN TOTAL ENERGÍA</span>
                             <span class="text-xl font-black">${num(totalEnergy, 0)} kWh</span>
                         </div>
@@ -1546,16 +1361,17 @@
                 </div>
             `;
 
-            // --- 4. Precios de la Oferta Consolidada (Dynamic Winner - Always DRK if saving money) ---
+            // --- 4. Precios de la Oferta Consolidada (Dynamic Winner) ---
             const { winningOffers, hasDrkWinner } = getWinningOffersPerType(individualResults);
             let tariffPricesHTML = '';
             const consolidatedPrices = [];
-            const brandPrimaryText = brand.PRIMARY_TEXT;
+            const brandPrimaryText = 'text-drk-800'; // Hardcoded
+            const color800 = 'drk-800'; // Hardcoded
 
+            // Determine the label for the price section
             const priceSectionLabel = 'Precios de la Oferta Consolidada (DRK Energía)';
 
-            const basePrefix = 'drk';
-            const color800 = 'drk-800'; 
+            const basePrefix = 'drk'; // Hardcoded
 
             // Add 2.0TD Prices (P1-P2, E1-E3)
             const offer20 = winningOffers['2.0TD'];
@@ -1586,7 +1402,7 @@
 
             // Add 3.0TD Prices (P1-P6, E1-E6)
             const offer30 = winningOffers['3.0TD'];
-            const has30TD = individualResults.some(d => d.originalTariffType === '3.0TD');
+            const has30TD = individualResults.some(d => d.originalTariffType === '3.0TD' || d.originalTariffType === '6.1TD');
             if (offer30 && has30TD && offer30.name !== 'Tu Tarifa Actual') {
                 let pRows = '';
                 for(let i=1; i<=6; i++) {
@@ -1596,11 +1412,11 @@
                 for(let i=1; i<=6; i++) {
                     eRows += `<p class="text-slate-500">E${i}:</p><p class="font-mono font-bold text-right">${numPriceFormula(offer30[`p${i}_price`])}</p>`;
                 }
-                const fullTariffName30 = `${offer30.name || 'Tarifa 3.0TD'} - ${offer30.description || 'N/A'}`;
+                const fullTariffName30 = `${offer30.name || 'Tarifa 3.0TD/6.1TD'} - ${offer30.description || 'N/A'}`;
 
                 consolidatedPrices.push(`
                     <div class="mb-4 p-3 bg-white rounded-lg border border-${basePrefix}-100">
-                        <h5 class="font-black text-sm text-${color800} border-b pb-1 mb-2">Tarifa 3.0 TD (Industria/Consumo) - ${fullTariffName30}</h5>
+                        <h5 class="font-black text-sm text-${color800} border-b pb-1 mb-2">Tarifa 3.0 TD / 6.1 TD (Industria/Consumo) - ${fullTariffName30}</h5>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 text-xs">
                             <div class="col-span-2 md:col-span-4 font-bold text-cta-red-500 mb-1">POTENCIA (€/kW/día)</div>
                             ${pRows}
@@ -1662,33 +1478,33 @@
 
                 allBreakdownsHTML += `
                     <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-lg text-sm">
-                                   <h4 class="text-lg font-black text-slate-800 border-b pb-2 mb-3">Suministro ${index + 1}: ${resItem.cups} (${resItem.originalTariffType})</h4>
-                                   ${statusText}
-                                   <p class="text-xs text-slate-500 mb-3">Tarifa aplicada en el cálculo: <span class="font-bold text-slate-700">${appliedOfferName}</span></p>
-                                   <div class="grid grid-cols-2 gap-4 border-b border-slate-200 pb-3 mb-3">
-                                       <div class="text-center">
-                                           <p class="text-slate-400 text-xs uppercase">Factura Actual Periodo</p>
-                                           <p class="font-bold text-cta-red-500">${eur(resItem.importe_total)}</p>
-                                       </div>
-                                       <div class="text-center">
-                                           <p class="text-slate-400 text-xs uppercase">Nuevo Coste Periodo</p>
-                                           <p class="font-black ${brand.PRIMARY_TEXT}">${eur(resItem.totalPeriod)}</p>
-                                       </div>
+                               <h4 class="text-lg font-black text-slate-800 border-b pb-2 mb-3">Suministro ${index + 1}: ${resItem.cups} (${resItem.originalTariffType})</h4>
+                               ${statusText}
+                               <p class="text-xs text-slate-500 mb-3">Tarifa aplicada en el cálculo: <span class="font-bold text-slate-700">${appliedOfferName}</span></p>
+                               <div class="grid grid-cols-2 gap-4 border-b border-slate-200 pb-3 mb-3">
+                                   <div class="text-center">
+                                       <p class="text-slate-400 text-xs uppercase">Factura Actual Periodo</p>
+                                       <p class="font-bold text-cta-red-500">${eur(resItem.importe_total)}</p>
                                    </div>
+                                   <div class="text-center">
+                                       <p class="text-slate-400 text-xs uppercase">Nuevo Coste Periodo</p>
+                                       <p class="font-black text-drk-800">${eur(resItem.totalPeriod)}</p>
+                                   </div>
+                               </div>
 
-                                   <p class="font-bold text-slate-800 mb-2">Desglose (${appliedOfferName}):</p>
+                               <p class="font-bold text-slate-800 mb-2">Desglose (${appliedOfferName}):</p>
+                               
+                               <div class="pl-2 space-y-2 font-mono text-xs">
+                                   <p class="font-bold text-slate-700">POTENCIA</p>
+                                   ${powerBreakdown}
+                                   <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Potencia</span><span>${num(resItem.subPower, 2)} €</span></div>
                                    
-                                   <div class="pl-2 space-y-2 font-mono text-xs">
-                                       <p class="font-bold text-slate-700">POTENCIA</p>
-                                       ${powerBreakdown}
-                                       <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Potencia</span><span>${num(resItem.subPower, 2)} €</span></div>
-                                       
-                                       <p class="font-bold text-slate-700 pt-2">ENERGÍA</p>
-                                       ${energyBreakdown}
-                                       <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Energía (Neto)</span><span>${num(resItem.subEnergyNet, 2)} €</span></div>
-                                       
-                                       <div class="flex justify-between font-black ${brand.PRIMARY_TEXT} pt-2"><span>TOTAL CON IMPUESTOS</span><span>${eur(resItem.totalPeriod)}</span></div>
-                                   </div>
+                                   <p class="font-bold text-slate-700 pt-2">ENERGÍA</p>
+                                   ${energyBreakdown}
+                                   <div class="flex justify-between font-bold text-slate-800 border-t pt-1"><span>Subtotal Energía (Neto)</span><span>${num(resItem.subEnergyNet, 2)} €</span></div>
+                                   
+                                   <div class="flex justify-between font-black text-drk-800 pt-2"><span>TOTAL CON IMPUESTOS</span><span>${eur(resItem.totalPeriod)}</span></div>
+                               </div>
                     </div>
                 `;
             });
@@ -1698,7 +1514,7 @@
 
             detailsContainer.innerHTML = `
                 ${supplySummarySection}
-                <h3 id="extracted-data-header" class="text-lg font-bold text-slate-800 border-l-4 ${brand.BORDER.replace('border-', 'border-')} pl-3">Datos Acumulados</h3>
+                <h3 id="extracted-data-header" class="text-lg font-bold text-slate-800 border-l-4 border-drk-500 pl-3">Datos Acumulados</h3>
                 <div id="user-consumption-details" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-sm">${correctedConsumptionHTML}</div>
                 
                 ${tariffPricesHTML}
@@ -1717,9 +1533,10 @@
          */
         function renderResultsUI(res) {
             const offer = res.offer;
-            const brand = activeBrand; // Fixed to DRK
+            const brand = BRANDS.DRK; // Hardcoded to DRK
             const tariffType = res.tariffType || currentTariffType;
-            const config = TARIFF_CONFIG[tariffType];
+            // Usa 3.0TD config if tariffType is 6.1TD
+            const config = TARIFF_CONFIG[tariffType] || TARIFF_CONFIG['3.0TD'];
 
             // FIX: Usar funciones robustas contra NaN
             const eur = n => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n || 0);
@@ -1747,7 +1564,7 @@
 
             if (res.isNegativeSavings) {
                 savingsEl.textContent = "0,00 €";
-                savingsEl.classList.add(brand.PRIMARY_TEXT.split('-')[1]); // Añadir solo el color de texto
+                savingsEl.classList.add('text-drk-800'); // Añadir solo el color de texto
                 
                 newCostLabelEl.textContent = "TU COSTE ACTUAL";
                 
@@ -1802,12 +1619,12 @@
                     <div><p class="text-xs text-slate-500">Periodo</p><p class="font-bold text-slate-700">${res.dias_facturados} días</p></div>
                     <div><p class="text-xs text-slate-500">Fechas</p><p class="font-bold text-slate-700 text-xs">${res.fechas}</p></div>
                     <div class="col-span-2 border-t pt-2 mt-2">
-                        <p class="font-bold ${brand.PRIMARY_TEXT} mb-2">Consumo por Periodo (kWh)</p>
+                        <p class="font-bold text-drk-800 mb-2">Consumo por Periodo (kWh)</p>
                         ${energyRows}
-                        <div class="flex justify-between font-bold ${brand.PRIMARY_TEXT} mt-1 border-t pt-1"><span>Total Consumo</span><span>${num(totalEnergy, 0)} kWh</span></div>  
+                        <div class="flex justify-between font-bold text-drk-800 mt-1 border-t pt-1"><span>Total Consumo</span><span>${num(totalEnergy, 0)} kWh</span></div>  
                     </div>
                     <div class="col-span-2">
-                        <p class="font-bold ${brand.PRIMARY_TEXT} mb-2">Potencia Contratada (kW)</p>
+                        <p class="font-bold text-drk-800 mb-2">Potencia Contratada (kW)</p>
                         ${powerRows}
                     </div>
                 </div>
@@ -1855,13 +1672,13 @@
                     <div class="mb-4">
                         <p class="font-bold text-slate-800 mb-1">POTENCIA (€/kW Día)</p>
                         ${powerBreakdown}
-                        <div class="flex justify-between font-bold ${brand.SECONDARY_TEXT} border-t mt-1 pt-1"><span>Subtotal Potencia</span><span>${num(res.subPower, 2)} €</span></div>
+                        <div class="flex justify-between font-bold text-drk-600 border-t mt-1 pt-1"><span>Subtotal Potencia</span><span>${num(res.subPower, 2)} €</span></div>
                     </div>
 
                     <div class="mb-4">
                         <p class="font-bold text-slate-800 mb-1">ENERGÍA (€/kWh)</p>
                         ${energyBreakdown}
-                        <div class="flex justify-between font-bold ${brand.SECONDARY_TEXT} border-t mt-1 pt-1"><span>Subtotal Energía (Bruto)</span><span>${num(res.subEnergy, 2)} €</span></div>
+                        <div class="flex justify-between font-bold text-drk-600 border-t mt-1 pt-1"><span>Subtotal Energía (Bruto)</span><span>${num(res.subEnergy, 2)} €</span></div>
                         ${discountRowsHtml}
                     </div>
 
@@ -1873,14 +1690,14 @@
                     </div>
                     
                     <div class="bg-drk-900 text-white p-3 rounded-lg flex justify-between items-center text-md font-bold mb-1 mt-4"><span>TOTAL FACTURA</span><span>${eur(res.totalPeriod)}</span></div>
-                    <div class="text-center mt-2 ${brand.PRIMARY_TEXT} font-bold">Total Anual Estimado: ${eur(res.totalAnnual)}</div>
+                    <div class="text-center mt-2 text-drk-800 font-bold">Total Anual Estimado: ${eur(res.totalAnnual)}</div>
                 </div>
             `;
             
             const detailsContainer = document.getElementById('details-container');
 
             detailsContainer.innerHTML = `
-                <h3 id="extracted-data-header" class="text-lg font-bold text-slate-800 border-l-4 ${brand.BORDER.replace('border-', 'border-')} pl-3">Datos Extraídos</h3>
+                <h3 id="extracted-data-header" class="text-lg font-bold text-slate-800 border-l-4 border-drk-500 pl-3">Datos Extraídos</h3>
                 <div id="user-consumption-details" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-sm">${consumptionHTML}</div>
                 <h3 class="text-lg font-bold text-slate-800 border-l-4 border-drk-800 pl-3">Cálculo Oficial</h3>
                 <div id="cost-breakdown" class="bg-white p-0 rounded-xl border border-slate-200 shadow-sm overflow-hidden text-sm">
@@ -1889,7 +1706,7 @@
             `;
         }
         
-        // --- COPIA HTML MEJORADA ---
+        // --- COPIA HTML MEJORADA (HARDCODED DRK BRANDING) ---
 
         async function handleCopyOffer() {
             if (!lastComparisonResult) return window.showErrorModal("Primero realice una comparación.");
@@ -1940,7 +1757,7 @@
         function generateStyledHtmlOffer(commercialCode) {
             const bd = lastComparisonResult;
             const offer = bd.offer;
-            const brand = BRANDS.DRK; // Fixed to DRK
+            const brand = BRANDS.DRK; // Hardcoded
             
             // FIX: Usar funciones robustas contra NaN
             const eur = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n || 0);
@@ -1948,8 +1765,8 @@
             const numPriceFormula = (n) => new Intl.NumberFormat('es-ES', { minimumFractionDigits: 6, maximumFractionDigits: 6 }).format(n || 0);
             
             const DRK_DARK = '#0c4a6e'; const DRK_MED = '#075985'; const DRK_CTA = '#0284c7';
-            
-            // --- Dynamic Branding Setup ---
+
+            // --- Dynamic Branding Setup (Hardcoded to DRK) ---
             const D_PRIMARY_DARK = DRK_DARK;
             const D_PRIMARY_MED = DRK_MED;
             const D_ACCENT_CTA = DRK_CTA;
@@ -1957,7 +1774,7 @@
             const ZONA_GEOGRAFICA = "PENINSULA"; // HARDCODED AS REQUESTED
 
             const RED_CTA = '#CC0000';
-            const BG_LIGHT = '#f0f9ff';  
+            const BG_LIGHT = '#f0f9ff'; // drk-50 
             const GREEN_SAVE = '#16a34a';
             
             // --- Shared Section Title Style (Removed margin-top: 10px) ---
@@ -1987,7 +1804,7 @@
             const emailBody = `Hola ${D_BRAND_NAME.toUpperCase()}, confirmo la aceptación de la oferta con CUPS: ${bd.cups}.${LB}${LB}` +
                                  `--- DATOS DE LA OFERTA ---${LB}${LB}` +
                                  `Comercializadora y Tarifa: ${commercialTariffName}${LB}` +  
-                                 `Zona Geográfica: ${ZONA_GEOGRAFICA}${LB}` + 
+                                 `Zona Geográfica: ${ZONA_GEOGRAFICA}${LB}` +
                                  `Ahorro Anual Estimado: ${eur(bd.savings)}${LB}` +
                                  `Total Mensual Estimado: ${monthlyEstimate}${LB}` +
                                  `Consumo Total Facturado: ${totalConsumption}${LB}${LB}` +
@@ -1999,20 +1816,20 @@
                                  `E3 (Energía - €/kWh): ${numPriceFormula(e3Price)}${LB}` +
                                  `------------------------------${LB}${LB}` +  
                                  `${discountLine}` +  
-                                 `--- DATOS DEL CLIENTE ---${LB}` + 
+                                 `--- DATOS DEL CLIENTE ---${LB}` +
                                  `Nombre completo: ${clientName}${LB}` +
                                  `Teléfono de contacto: ${clientPhone}${LB}` +
                                  `Email de contacto: ${clientEmail}${LB}${LB}` +
                                  `--- INFORMACIÓN ADICIONAL (Opcional) ---${LB}` + 
                                  `[AGREGUE CUALQUIER COMENTARIO EXTRA AQUÍ]${LB}${LB}` +
-                                 `--- DOCUMENTACIÓN REQUERIDA ---${LB}${LB}` + 
+                                 `--- DOCUMENTACIÓN REQUERIDA ---${LB}${LB}` +
                                  `Para formalizar el contrato, por favor, responde a este email adjuntando:${LB}${LB}` +
                                  `1. Foto del DNI/CIF (anverso y reverso).${LB}` +
                                  `2. Última factura (mínimo 3 meses de antigüedad).${LB}` +
                                  `3. Email de contacto para validación.${LB}` +
                                  `4. Teléfono de contacto.${LB}` +
                                  `5. Número de cuenta bancaria (IBAN).${LB}${LB}` +
-                                 `Adjunto la documentación requerida.`; 
+                                 `Adjunto la documentación requerida.`;
 
             const subject = `FORMALIZACIÓN DE CONTRATO - CUPS: ${bd.cups}`;
             const formalizationRecipients = 'f.araujo@drk.es,r.guerra@drk.es,s.caballero@drk.es'; // Email por defecto
@@ -2057,7 +1874,7 @@
 
             // --- PLANTILLA ESTÁNDAR (Ahorro Positivo) ---
             
-            const currentTariffConfig = TARIFF_CONFIG[bd.tariffType]; 
+            const currentTariffConfig = TARIFF_CONFIG[bd.tariffType] || TARIFF_CONFIG['3.0TD']; // Usa config de 3.0TD para 6.1TD
             
             // Desglose: Potencia
             let desglosePotencia = bd.powerCosts.map(p => {
@@ -2206,8 +2023,9 @@
 
         function generateMultiStyledHtmlOffer(commercialCode) {
             const bd = lastComparisonResult; // Resultado acumulado
-            const offer = bd.offer;
             const individualResults = bd.individualResults;
+            const offer = bd.offer;
+            const brand = BRANDS.DRK; // Hardcoded
             
             // FIX: Usar funciones robustas contra NaN
             const eur = (n) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n || 0);
@@ -2216,16 +2034,14 @@
             
             const DRK_DARK = '#0c4a6e'; const DRK_MED = '#075985'; const DRK_CTA = '#0284c7';
 
-            // --- Determine Dynamic Branding for Email Copy (Fixed to DRK) ---
-            const { winningOffers } = getWinningOffersPerType(individualResults);
+            // --- Determine Dynamic Branding for Email Copy (Hardcoded DRK) ---
+            const { winningOffers, hasDrkWinner } = getWinningOffersPerType(individualResults);
 
-            let dynamicBrand = BRANDS.DRK; 
-            
             const D_PRIMARY_DARK = DRK_DARK;
             const D_PRIMARY_MED = DRK_MED;
             const D_ACCENT_CTA = DRK_CTA;
-            const D_BRAND_NAME = dynamicBrand.NAME;
-            const BG_LIGHT = '#f0f9ff';  
+            const D_BRAND_NAME = brand.NAME;
+            const BG_LIGHT = '#f0f9ff'; // drk-50  
 
             const ZONA_GEOGRAFICA = "PENINSULA"; // HARDCODED AS REQUESTED
 
@@ -2245,12 +2061,14 @@
             individualResults.forEach((resItem, index) => {
                 // La lógica de cuál es la mejor oferta ya se ha aplicado en saveSupply
                 const isBest = resItem.isNegativeSavings === false;  
-                const currentConfig = TARIFF_CONFIG[resItem.originalTariffType];
+                const currentConfig = TARIFF_CONFIG[resItem.originalTariffType] || TARIFF_CONFIG['3.0TD'];
                 const periods = currentConfig.periods;
                 const powerPeriods = currentConfig.powerPeriods;
                 
                 // Determinar el nombre de la tarifa final aplicada
-                const appliedOfferName = resItem.offer.isDrk  ? `${resItem.offer.name} - ${resItem.offer.description}` : resItem.offer.name;
+                const appliedOfferName = resItem.offer.isDrk 
+                    ? `${resItem.offer.name} - ${resItem.offer.description}` 
+                    : resItem.offer.name;
 
                 // Desglose: Potencia
                 let desglosePotencia = resItem.powerCosts.map(p => {
@@ -2278,7 +2096,7 @@
                     <tr><td style="padding: 5px 8px; font-weight: bold; color: #CC0000;">DESCUENTO COMERCIAL (${num(resItem.discountRate * 100, 0)}%)</td><td style="padding: 5px 8px; text-align: right; font-weight: bold; color: #CC0000; white-space: nowrap;">-${num(resItem.discountAmount, 2)} €</td></tr>
                     ` : '';
 
-                // MODIFICACIÓN #2: Ajuste para eliminar "Sin Ahorro" en el email copy si no hay ahorro, dejando solo el total.
+                // MODIFICACIÓN #2: Ajuste para eliminar "Sin Ahorro" en la vista interna, dejando solo el total.
                 const ahorroAnualText = isBest
                     ? `. Ahorro Anual: <span style="color: ${GREEN_SAVE}; font-weight: bold;">${eur(resItem.savings)}</span>`
                     : '';
@@ -2320,8 +2138,8 @@
 
             const emailBody = `Hola ${D_BRAND_NAME.toUpperCase()}, confirmo la aceptación de la oferta consolidada para ${individualResults.length} suministros (MULTICUPS).${LB}${LB}` +
                                  `--- RESUMEN CONSOLIDADO ---${LB}` +
-                                 `Oferta Consolidada: ${consolidatedTariffName}${LB}` + // MODIFICADO
-                                 `Zona Geográfica: ${ZONA_GEOGRAFICA}${LB}` + 
+                                 `Oferta Consolidada: ${consolidatedTariffName}${LB}` + 
+                                 `Zona Geográfica: ${ZONA_GEOGRAFICA}${LB}` +
                                  `Ahorro Anual Estimado: ${eur(bd.savings)}${LB}` +
                                  `Total Mensual Estimado: ${eur(bd.totalAnnual / 12)}${LB}` +
                                  `Total Suministros: ${individualResults.length}${LB}${LB}` +
@@ -2332,23 +2150,23 @@
                                  `Email de contacto: ${clientEmail}${LB}${LB}` +
                                  `--- INFORMACIÓN ADICIONAL (Opcional) ---${LB}` + 
                                  `[AGREGUE CUALQUIER COMENTARIO EXTRA AQUÍ]${LB}${LB}` +
-                                 `--- DOCUMENTACIÓN REQUERIDA ---${LB}${LB}` + 
+                                 `--- DOCUMENTACIÓN REQUERIDA ---${LB}${LB}` +
                                  `Para formalizar el contrato, por favor, responde a este email adjuntando:${LB}${LB}` +
                                  `1. Foto del DNI/CIF (anverso y reverso).${LB}` +
                                  `2. Última factura (mínimo 3 meses de antigüedad).${LB}` +
                                  `3. Email de contacto para validación.${LB}` +
                                  `4. Teléfono de contacto.${LB}` +
                                  `5. Número de cuenta bancaria (IBAN).${LB}${LB}` +
-                                 `Adjunto la documentación requerida.`; 
+                                 `Adjunto la documentación requerida.`;
 
             const subject = `FORMALIZACIÓN CONSOLIDADA - ${individualResults.length} CUPS`;
             const formalizationRecipients = 'f.araujo@drk.es,r.guerra@drk.es,s.caballero@drk.es';  
             const formalizationLink = `mailto:${formalizationRecipients}?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
 
-            // --- Precios de la Oferta Consolidada (Dynamic Winner - Fixed to DRK) ---
+            // --- Precios de la Oferta Consolidada (Dynamic Winner) ---
             
             let preciosConsolidadosHTML = '';
-            const priceSectionHeader = 'PRECIOS DE LA OFERTA CONSOLIDADA (DRK ENERGÍA)';
+            const priceSectionHeader = 'PRECIOS DE LA OFERTA CONSOLIDADA (DRK ENERGÍA)'; // Hardcoded
 
             // 2.0TD Prices
             const offer20 = winningOffers['2.0TD'];
@@ -2378,7 +2196,7 @@
 
             // 3.0TD Prices (P1-P6, E1-E6)
             const offer30 = winningOffers['3.0TD'];
-            const has30TD = individualResults.some(d => d.originalTariffType === '3.0TD');
+            const has30TD = individualResults.some(d => d.originalTariffType === '3.0TD' || d.originalTariffType === '6.1TD');
             if (offer30 && has30TD && offer30.name !== 'Tu Tarifa Actual') {
                 let pRows = '';
                 for(let i=1; i<=6; i++) {
@@ -2388,11 +2206,11 @@
                 for(let i=1; i<=6; i++) {
                     eRows += `<tr><td style="padding: 2px 0; font-weight: bold; color: ${GREEN_SAVE};">E${i} (€/kWh):</td><td style="text-align: right; font-weight: bold; font-family: monospace; color: ${GREEN_SAVE};">${numPriceFormula(offer30[`p${i}_price`])}</p></td></tr>`;
                 }
-                const fullTariffName30 = `${offer30.name || 'Tarifa 3.0TD'} - ${offer30.description || 'N/A'}`;
+                const fullTariffName30 = `${offer30.name || 'Tarifa 3.0TD/6.1TD'} - ${offer30.description || 'N/A'}`;
 
                 preciosConsolidadosHTML += `
                     <div style="margin-top: 15px; padding: 10px; background-color: #ffffff; border: 1px solid #ddd; border-radius: 6px;">
-                        <p style="margin: 0 0 5px 0; font-weight: bold; font-size: 13px; color: ${D_PRIMARY_DARK};">Tarifa 3.0 TD (Industria/Consumo)</p>
+                        <p style="margin: 0 0 5px 0; font-weight: bold; font-size: 13px; color: ${D_PRIMARY_DARK};">Tarifa 3.0 TD / 6.1 TD (Industria/Consumo)</p>
                         <table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 11px; table-layout: fixed;">
                             <tr><td colspan="2" style="font-weight: bold; color: ${RED_CTA}; padding: 5px 0 2px 0;">POTENCIA</td></tr>
                             ${pRows}
@@ -2466,7 +2284,7 @@
                         </table>
                     </td></tr>
                     
-                    ${preciosConsolidadosHTML}
+                    ${preciosResumenSection}
                     
                     <tr><td colspan="2"><div style="background-color: ${D_PRIMARY_MED}; color: white; font-weight: bold; padding: 8px; font-size: 14px; margin-top: 10px;">DESGLOSE INDIVIDUAL DE AHORRO</div></td></tr>
                     ${individualBreakdowns}
@@ -2483,6 +2301,27 @@
         }
 
         // --- MANEJO DE INPUTS MANUALES ---
+
+        function clearManualInputs(prefix = 'input') {
+            document.getElementById(`${prefix}-cups`).value = '';
+            document.getElementById(`${prefix}-billing-days`).value = '';
+            document.getElementById(`${prefix}-total-bill`).value = '';
+            for (let i = 1; i <= 6; i++) {
+                const pInput = document.getElementById(`${prefix}-p${i}-kw`);
+                if (pInput) pInput.value = '';
+                const eInput = document.getElementById(`${prefix}-e${i}-kwh`);
+                if (eInput) eInput.value = '';
+            }
+        }
+        
+        function closeManualInputModal() {
+            document.getElementById('manual-input-modal').classList.add('hidden');
+            document.getElementById('manual-input-modal').classList.remove('flex');
+            // Si estábamos en modo MultiCups, volvemos al selector 2.0/3.0
+            if (currentTariffType === 'MULTICUPS') {
+                showMultiCupsSagaView();
+            }
+        }
 
         function handleManualInput() {
             const isMultiCupsMode = currentTariffType === 'MULTICUPS';
@@ -2543,7 +2382,6 @@
                 document.getElementById('execute-manual-input-btn').textContent = "AÑADIR SUMINISTRO";
                 
                 // Forzar la selección del tipo de CUPS seleccionado en la vista SAGA
-                // Solo si el tipo existe en el selector (2.0TD o 3.0TD)
                 if (selectEl.querySelector(`option[value="${tariffToConfigure}"]`)) {
                     selectEl.value = tariffToConfigure;
                 }
@@ -2562,11 +2400,7 @@
             document.getElementById('manual-input-modal').classList.add('flex');
             document.getElementById('input-cups').focus();
         }
-
-        // --- MANEJO DE EVENTOS ---
         
-        // Removed updateComparisonMode function since it's hardcoded
-
         // --- FIX: Cancelación del Escáner ---
         function cancelScanner() {
             stopScanner(); // Detiene el stream de la cámara
@@ -2619,8 +2453,7 @@
                     document.getElementById('send-offer-modal').classList.add('flex');
                     // Aplicar focus ring de la marca a los inputs
                     document.querySelectorAll('#send-offer-modal input').forEach(input => {
-                        input.classList.remove('focus:ring-drk-500', 'focus:ring-powercup-500');
-                        input.classList.add('focus:ring-drk-500');
+                        input.classList.add('focus:ring-drk-500'); // Hardcoded DRK
                     });
                 } else {
                     window.showErrorModal("Por favor, analice una factura primero para generar una oferta.");
@@ -2632,15 +2465,15 @@
             document.getElementById('qr-toggle-checkbox').addEventListener('change', (e) => {
                 const wrapper = document.getElementById('qr-content-wrapper');
                 if (e.target.checked) {
-                    generateQRCode(activeBrand);
+                    generateQRCode();
                     wrapper.classList.add('active');
                 } else {
                     wrapper.classList.remove('active');
                 }
             });
 
-            // NO HAY SELECTOR DE MODO: Aplicar los estilos DRK directamente al inicio
-            applyBrandStyles(BRANDS.DRK); 
+            // Initial DRK state setup
+            document.getElementById('paste-catcher').style.setProperty('--qr-border-color', BRANDS.DRK.QR_BORDER_COLOR);
         });
         
         function decodeQRFromImage(imageFileOrBlob) {
@@ -2789,17 +2622,15 @@
 
             if (isMultiCupsMode) {
                 // En modo MultiCups, el QR solo puede ser 2.0TD
-                // Creamos un objeto que imita el input manual
                 const dataForSave = { ...directData, originalTariffType: '2.0TD' };  
 
                 // Forzamos 2.0TD para la confirmación
                 tempQrData = dataForSave;
-                // El tipo de tarifa a sugerir para la confirmación es el seleccionado en la vista saga (o 2.0TD por defecto si es QR)
                 const defaultTariffForConfirmation = multiCupsAddType || '2.0TD';
                 document.getElementById('confirm-tariff-select').value = defaultTariffForConfirmation;  
                 document.getElementById('confirm-tariff-select').innerHTML = `<option value="2.0TD">2.0 TD (Punta, Llano, Valle)</option><option value="3.0TD">3.0 TD (6 Periodos - Se mapearán P1/P2/P3)</option>`;
 
-                // Mostrar modal de confirmación (permitiendo al usuario cambiar a 3.0TD si lo necesita)
+                // Mostrar modal de confirmación
                 showQRConfirmationModal(dataForSave);
             } else {
                 // Modo Individual: Precarga inputs y compara directamente si es 2.0TD
@@ -2822,7 +2653,7 @@
                      document.getElementById('manual-input-modal').classList.remove('hidden');
                      document.getElementById('manual-input-modal').classList.add('flex');
                 } else {
-                    window.showErrorModal("Las tarifas no han cargado aún. Por favor, intente de nuevo.");
+                     window.showErrorModal("Las tarifas no han cargado aún. Por favor, intente de nuevo.");
                 }
             }
         }
@@ -2835,16 +2666,15 @@
             const summaryEl = document.getElementById('qr-data-summary');
             const selectEl = document.getElementById('confirm-tariff-select');
             
-            // Si estamos en MultiCups Mode, solo dejamos 2.0TD/3.0TD en el selector
+            // Selector simplificado para MultiCups
             if (currentTariffType === 'MULTICUPS') {
                 selectEl.innerHTML = `<option value="2.0TD">2.0 TD (Punta, Llano, Valle)</option><option value="3.0TD">3.0 TD (6 Periodos - Se mapearán P1/P2/P3)</option>`;
                 selectEl.value = multiCupsAddType; // Usa el tipo seleccionado en la vista saga
-                modal.querySelector('h3').textContent = `Confirmar Suministro MultiCups`; // NEW: Adjust title for MultiCups
+                modal.querySelector('h3').textContent = `Confirmar Suministro MultiCups`;
             } else {
-                 // Modo Individual, solo opciones completas
                  selectEl.innerHTML = `<option value="2.0TD">2.0 TD (Punta, Llano, Valle)</option><option value="3.0TD">3.0 TD (6 Periodos)</option>`;
                  selectEl.value = data.originalTariffType;  
-                 modal.querySelector('h3').textContent = `Confirmar Suministro`; // Reset title for Individual
+                 modal.querySelector('h3').textContent = `Confirmar Suministro`;
             }
 
             summaryEl.innerHTML = `
@@ -2878,9 +2708,10 @@
         };
 
         function saveSupply(data, tariffType) {
-            const tariffsToCompare = currentTariffs[tariffType];
+            const tariffKey = tariffType === '6.1TD' ? '3.0TD' : tariffType; // Mapeo de seguridad para datos 6.1TD
+            const tariffsToCompare = currentTariffs[tariffKey];
             if (!tariffsToCompare || tariffsToCompare.length === 0) {
-                window.showErrorModal(`Las tarifas ${tariffType} no están cargadas.`);
+                window.showErrorModal(`Las tarifas ${tariffKey} no están cargadas.`);
                 return;
             }
             
@@ -2893,7 +2724,7 @@
             const e4_kwh_input = data.consumo_p4 || 0;
 
             // 1. Manejo de mapeo de Potencias y Consumos
-            if (tariffType === '3.0TD') {
+            if (tariffType === '3.0TD' || tariffType === '6.1TD') {
                 // Verificar si se introdujeron manualmente los 6 periodos
                 const isManual6PeriodInput = p3_kw_input > 0 || e4_kwh_input > 0 || (data.consumo_p4 > 0 || data.consumo_p5 > 0 || data.consumo_p6 > 0);
                 
@@ -2933,7 +2764,7 @@
             // 2. Ejecutar la comparación con el objeto de datos corregido
             const results = tariffsToCompare.map(t => calculateTariffCost(t, dataForCalc, tariffType));
             
-            let bestOverall = null; // Absolute best (DRK or Power Cup)
+            let bestOverall = null; // Absolute best
             let bestDrk = null;  // Best DRK only
             
             results.forEach(r => {
@@ -2947,18 +2778,21 @@
                 // Best DRK is the DRK one with the lowest annual cost
                 if (r.offer.isDrk && r.offer.name !== 'Tu Tarifa Actual') {
                     if (!bestDrk || annualCost < bestDrk.totalAnnual) {
-                            bestDrk = r;
+                           bestDrk = r;
                     }
                 }
             });
             
             let finalIndividualResult = bestOverall;
             
-            // --- LÓGICA DE SELECCIÓN INDIVIDUAL SEGÚN MODO DE COMPARACIÓN (Fijo a DRK Prioritario) ---
-            if (comparisonMode === 'drk_prioritized' && bestDrk && bestDrk.totalAnnual < bestDrk.originalBillAnnual) {
+            // --- LÓGICA DE SELECCIÓN INDIVIDUAL (DRK PRIORITARIO FORZADO) ---
+            if (bestDrk && bestDrk.totalAnnual < bestDrk.originalBillAnnual) {
                 finalIndividualResult = bestDrk;
-            } 
-            
+            } else {
+                finalIndividualResult = bestOverall;
+            }
+
+
             if (!finalIndividualResult) return window.showErrorModal("No se pudo calcular el ahorro para esta CUPS.");
             
             // Re-calculate the final savings based on the selected 'final' result's annual cost
@@ -2973,8 +2807,8 @@
             // Ensure the correct tariff type used for calculation is stored
             finalIndividualResult.originalTariffType = tariffType;  
 
-            // Copy back the 6-period power and consumption values in case they were generated (for 3.0TD)
-            if (tariffType === '3.0TD') {
+            // Copy back the 6-period power and consumption values in case they were generated (for 3.0TD/6.1TD)
+            if (tariffType === '3.0TD' || tariffType === '6.1TD') {
                 for (let i = 1; i <= 6; i++) {
                     finalIndividualResult[`consumo_p${i}`] = dataForCalc[`consumo_p${i}`] || 0;
                     finalIndividualResult[`potencia_p${i}_kw`] = dataForCalc[`potencia_p${i}_kw`] || 0;
@@ -3008,7 +2842,6 @@
             updateMultiCupsSagaView(); // Update visibility to hide loading and enable buttons
             
             if (currentTariffs['2.0TD'].length === 0 || currentTariffs['3.0TD'].length === 0) {
-                 // Use a more specific error message based on which failed
                  const failed = [];
                  if (currentTariffs['2.0TD'].length === 0) failed.push('2.0TD');
                  if (currentTariffs['3.0TD'].length === 0) failed.push('3.0TD');
@@ -3017,17 +2850,18 @@
         }
         
         async function fetchTariffsFromSheet(tariffType) {
-            const config = TARIFF_CONFIG[tariffType];
-            if (!config) return; 
+            // Usa 3.0TD sheetId si el tipo es 6.1TD
+            const tariffKey = tariffType === '6.1TD' ? '3.0TD' : tariffType;
+            const config = TARIFF_CONFIG[tariffKey];
             const sheetId = config.sheetId;
 
             const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=0&t=${Date.now()}`;
 
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error(`Error red para ${tariffType}`);
+                if (!response.ok) throw new Error(`Error red para ${tariffKey}`);
                 const text = await response.text();
-                currentTariffs[tariffType] = parseCSV(text, tariffType);
+                currentTariffs[tariffKey] = parseCSV(text, tariffKey);
                 
                 // Solo actualiza el badge si estamos en modo individual y es el tipo seleccionado
                 if (currentTariffType !== 'MULTICUPS' && tariffType === currentTariffType) {
@@ -3036,8 +2870,8 @@
                 }
 
             } catch (e) {
-                console.error(`Error al cargar ${tariffType}:`, e);
-                currentTariffs[tariffType] = [];  
+                console.error(`Error al cargar ${tariffKey}:`, e);
+                currentTariffs[tariffKey] = [];  
                 if (currentTariffType !== 'MULTICUPS' && tariffType === currentTariffType) {
                     document.getElementById('tariff-display-badge').textContent = 'Error';
                 }
@@ -3069,22 +2903,22 @@
                  // Custom parsing to handle quoted fields correctly
                  let lastIndex = 0;
                  while(match = regex.exec(row)){
-                     let val = match[1].replace(/^"|"$/g, '').replace(/""/g, '"');
-                     // If the first capture group starts with the delimiter, it means the content is empty or the previous field was empty.
-                     if (match.index > lastIndex) {
-                         // Add empty string for missed fields
-                         for (let j = 0; j < (match.index - lastIndex) / delimiter.length; j++) {
-                             values.push('');
-                         }
-                     }
-                     values.push(val.trim());
-                     lastIndex = match.index + match[0].length;
+                      let val = match[1].replace(/^"|"$/g, '').replace(/""/g, '"');
+                      // If the first capture group starts with the delimiter, it means the content is empty or the previous field was empty.
+                      if (match.index > lastIndex) {
+                          // Add empty string for missed fields
+                          for (let j = 0; j < (match.index - lastIndex) / delimiter.length; j++) {
+                              values.push('');
+                          }
+                      }
+                      values.push(val.trim());
+                      lastIndex = match.index + match[0].length;
                  }
                  // Add trailing empty fields
                  if (values.length < headers.length) {
-                     for (let j = values.length; j < headers.length; j++) {
-                         values.push('');
-                     }
+                      for (let j = values.length; j < headers.length; j++) {
+                          values.push('');
+                      }
                  }
 
 
@@ -3094,8 +2928,8 @@
                  headers.forEach((h, idx) => {
                       let val = values[idx];
                        if (h.includes('price') || h.includes('potencia') || h === 'descuento') {
-                           val = parseFloat(val?.replace(',', '.') || 0);
-                           if(isNaN(val)) val = 0;
+                            val = parseFloat(val?.replace(',', '.') || 0);
+                            if(isNaN(val)) val = 0;
                        }
                        item[h] = val;
                  });
